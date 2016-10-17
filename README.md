@@ -1,2 +1,5 @@
 # db-course
-Buaa database course design
+**北航数据库课程设计**
+
+## 2016/10/17
+- 新建项目
