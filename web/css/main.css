@@ -1612,4 +1612,7 @@ blockquote {
 .form-group:last-child input {
   margin: 0;
 }
-                            
+
+.black {
+    color: #000
+}
