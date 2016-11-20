@@ -105,8 +105,10 @@
         <ul id="nav" class="nav navbar-nav">
           <li class="current"><a href="#body">首页</a></li>
           <li><a href="market.html">市场</a></li>
-          <li><a data-toggle="modal" data-target="#login" href="#services">登录</a></li>
-          <li><a href="#contact-us">注册</a></li>
+          <li><a id="outlg" data-toggle="modal" data-target="#login" href="#services">登录</a></li>
+          <li><a id="outrg" href="#contact-us">注册</a></li>
+          <li><a id="inlg" data-toggle="modal" data-target="#login" href="#services">login</a></li>
+          <li><a id="inrg" href="#contact-us">register</a></li>
         </ul>
       </nav>
       <!-- /main nav -->
@@ -405,6 +407,7 @@
 
   <!-- Main jQuery -->
   <script src="js/jquery-1.11.0.min.js"></script>
+  <!--<script src="js/jquery-3.1.1.min.js"></script>-->
   <!-- Bootstrap 3.1 -->
   <script src="js/bootstrap.min.js"></script>
   <!-- Slitslider -->
@@ -442,7 +445,10 @@
   <script src="js/grid.js"></script>
   <!-- Custom js -->
   <script src="js/custom.js"></script>
-
+  <script src="js/myjs.js"></script>
+  <script>
+    window.onload=modifybar();
+  </script>
 </body>
 
 </html>

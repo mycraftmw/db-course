@@ -52,12 +52,9 @@
   <!-- Modernizer Script for old Browsers -->
   <script src="js/modernizr-2.6.2.min.js"></script>
 
-
-
-
 </head>
 
-<body id="body">
+<body id="body" onload="myfun()">
   <!--
         Start Preloader
         ==================================== -->
@@ -92,7 +89,7 @@
         <!-- /responsive nav button -->
 
         <!-- logo -->
-        <a class="navbar-brand" href="#body">
+        <a class="navbar-brand" href="index.html">
           <h1 id="logo">
             <img src="img/logo-yiwu.png" />
           </h1>
@@ -103,10 +100,12 @@
       <!-- main nav -->
       <nav class="collapse navbar-collapse navbar-right" role="Navigation">
         <ul id="nav" class="nav navbar-nav">
-          <li class="current"><a href="#body">首页</a></li>
-          <li><a href="#services">市场</a></li>
-          <li><a data-toggle="modal" data-target="#login" href="#services">登录</a></li>
-          <li><a href="#contact-us">注册</a></li>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="market.html">市场</a></li>
+          <li><a id="outlg" data-toggle="modal" data-target="#login" href="#services">登录</a></li>
+          <li><a id="outrg" href="#contact-us">注册</a></li>
+          <li><a id="inlg" data-toggle="modal" data-target="#login" href="#services">login</a></li>
+          <li><a id="inrg" href="#contact-us">register</a></li>
         </ul>
       </nav>
       <!-- /main nav -->
@@ -146,78 +145,9 @@
   </div>
 
   <!--
-        Start About Section
-        ==================================== -->
-  <section id="about" class="bg-one">
-    <div class="container">
-      <div class="row">
-
-        <!-- section title -->
-        <div class="title text-center wow fadeIn" data-wow-duration="1500ms">
-          <h2>以物<span class="color">易物</span></h2>
-          <div class="border"></div>
-        </div>
-        <!-- /section title -->
-
-        <!-- About item -->
-        <div class="col-md-4 text-center wow fadeInUp" data-wow-duration="500ms">
-          <div class="wrap-about">
-            <div class="icon-box">
-              <i class="fa fa-lightbulb-o fa-4x"></i>
-            </div>
-            <!-- Express About Yourself -->
-            <div class="about-content text-center">
-              <h3>循环利用</h3>
-              <p>生活中有那种食之无用，弃之可惜的鸡肋么！或是那种自己一时兴起热血上头买来的货物，最后发现没什么大用。</p>
-              <p>我们交换吧！</p>
-            </div>
-          </div>
-        </div>
-        <!-- End About item -->
-
-        <!-- About item -->
-        <div class="col-md-4 text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="250ms">
-          <div class="wrap-about">
-            <div class="icon-box">
-              <i class="fa fa-exchange fa-4x "></i>
-            </div>
-            <!-- Express About Yourself -->
-            <div class="about-content text-center">
-              <h3>双倍享受</h3>
-              <p>每人一份快乐，交换一下，就会有两份快乐！想要用最少的付出获得最大的乐趣么！</p>
-              <p>我们交换吧！</p>
-            </div>
-          </div>
-        </div>
-        <!-- End About item -->
-
-        <!-- About item -->
-        <div class="col-md-4 text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="500ms">
-          <div class="wrap-about kill-margin-bottom">
-            <div class="icon-box">
-              <i class="fa fa-users fa-4x"></i>
-            </div>
-            <!-- Express About Yourself -->
-            <div class="about-content text-center">
-              <h3>扩展社交</h3>
-              <p>让乐于交友的你在这个平台上更加如意！每多一次交换，你就收获一份友谊！</p>
-              <p>我们交换吧！</p>
-            </div>
-          </div>
-        </div>
-        <!-- End About item -->
-
-      </div>
-      <!-- End row -->
-    </div>
-    <!-- End container -->
-  </section>
-  <!-- End section -->
-
-  <!--
         Start Main Features
         ==================================== -->
-  <section id="main-features">
+  <section id="">
     <div class="container">
       <div class="row">
 
@@ -404,6 +334,7 @@
         =====================================-->
 
   <!-- Main jQuery -->
+
   <script src="js/jquery-1.11.0.min.js"></script>
   <!-- Bootstrap 3.1 -->
   <script src="js/bootstrap.min.js"></script>
@@ -442,7 +373,10 @@
   <script src="js/grid.js"></script>
   <!-- Custom js -->
   <script src="js/custom.js"></script>
-
+  <script src="js/myjs.js"></script>
+  <script>
+    window.onload=modifybar();
+  </script>
 </body>
 
 </html>
