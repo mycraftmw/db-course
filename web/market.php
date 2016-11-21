@@ -100,12 +100,12 @@
       <!-- main nav -->
       <nav class="collapse navbar-collapse navbar-right" role="Navigation">
         <ul id="nav" class="nav navbar-nav">
-          <li><a href="index.html">首页</a></li>
-          <li><a href="market.html">市场</a></li>
+          <li><a href="index">首页</a></li>
+          <li><a href="market">市场</a></li>
           <li><a id="outlg" data-toggle="modal" data-target="#login" href="#services">登录</a></li>
-          <li><a id="outrg" href="user.html">注册</a></li>
+          <li><a id="outrg" href="user">注册</a></li>
           <li><a id="inlg" data-toggle="modal" data-target="#login" href="#services">login</a></li>
-          <li><a id="inrg" href="user.html">register</a></li>
+          <li><a id="inrg" href="register">register</a></li>
         </ul>
       </nav>
       <!-- /main nav -->

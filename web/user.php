@@ -103,12 +103,12 @@
       <!-- main nav -->
       <nav class="collapse navbar-collapse navbar-right" role="Navigation">
         <ul id="nav" class="nav navbar-nav">
-          <li><a href="index.html">首页</a></li>
-          <li><a href="market.html">市场</a></li>
+          <li><a href="index">首页</a></li>
+          <li><a href="market">市场</a></li>
           <li><a id="outlg" data-toggle="modal" data-target="#login" href="#services">登录</a></li>
-          <li><a id="outrg" href="user.html">注册</a></li>
+          <li><a id="outrg" href="user">注册</a></li>
           <li><a id="inlg" data-toggle="modal" data-target="#login" href="#services">login</a></li>
-          <li><a id="inrg" href="register.html">register</a></li>
+          <li><a id="inrg" href="register">register</a></li>
         </ul>
       </nav>
       <!-- /main nav -->
@@ -156,13 +156,14 @@
         <div class="row text-center">
           <div class="col-xs-2">
             <h4>用户名：</h4>
-            <h4>学号:</h4>
-            <h4>性别:</h4>
-            <h4>电话:</h4>
-            <h4>邮箱:</h4>
-            <h4>旧密码:</h4>
-            <h4>新密码:</h4>
-            <h4>确认新密码:</h4>
+            <h4>学号：</h4>
+            <h4>性别：</h4>
+            <h4>电话：</h4>
+            <h4>邮箱：</h4>
+            <h4>用户类型：</h4>
+            <h4>旧密码：</h4>
+            <h4>新密码：</h4>
+            <h4>确认新密码：</h4>
           </div>
           <div id="ui" class="col-xs-2">
             <h4 id="uiname">guo</h4>
@@ -170,6 +171,7 @@
             <h4 id="uisex">男</h4>
             <h4 id="uiphone">13000000000</h4>
             <h4 id="uimail">daguo@buaa.edu.cn</h4>
+            <h4 id="uiper">管理员</h4>            
             <input id="uiopw" class="black" type="password" name="old">
             <input id="uinpw" class="black" type="password" name="new">
             <input id="uicnpw" class="black" type="password" name="cnew">
