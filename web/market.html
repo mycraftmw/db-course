@@ -103,9 +103,9 @@
           <li><a href="index.html">首页</a></li>
           <li><a href="market.html">市场</a></li>
           <li><a id="outlg" data-toggle="modal" data-target="#login" href="#services">登录</a></li>
-          <li><a id="outrg" href="#contact-us">注册</a></li>
+          <li><a id="outrg" href="user.html">注册</a></li>
           <li><a id="inlg" data-toggle="modal" data-target="#login" href="#services">login</a></li>
-          <li><a id="inrg" href="#contact-us">register</a></li>
+          <li><a id="inrg" href="user.html">register</a></li>
         </ul>
       </nav>
       <!-- /main nav -->
@@ -129,15 +129,15 @@
         <div class="modal-body">
           <p>
             <label class="black">用户名：</label>
-            <input class="black" type="text" name="username" placeholder="username" />
+            <input id="lusername" class="black" type="text" name="username" placeholder="username" />
           </p>
           <p>
             <label class="black">密&emsp;码：</label>
-            <input type="password" name="password" placeholder="password" />
+            <input id="luserpw" type="password" name="password" placeholder="password" />
           </p>
         </div>
         <div class="modal-footer">
-          <a href="#" class="btn btn-success black" onclick="javascript:login()">登录</a>
+          <a href="#" class="btn btn-success black" onclick="login()">登录</a>
           <a href="#" class="btn black " data-dismiss="modal">关闭</a>
         </div>
       </div>

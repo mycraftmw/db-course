@@ -12,6 +12,6 @@ function login() {
     alert("登录函数还没写呢！");
 }
 
-function showAndHidden2() {
+function changepw() {
     alert("没写呢！没写呢！");
 }  
