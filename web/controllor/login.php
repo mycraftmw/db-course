@@ -2,15 +2,15 @@
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
-$dbname = "myDB";
+$dbname = "BDB";
 $conn = new mysqli ($servername, $username, $password, $dbname);
 
 if ($conn -> connect_error) {
-	$json = array ("state" => "n");
+	$json = array ("status" => "n");
 	echo json_encode ($json);
 }
-$name = "\"" . $_GET ["username"] . "\""; 
-$password = "\"" . $_GET ["password"] . "\"";
+$name = "\"" . $_POST ["username"] . "\""; 
+$password = "\"" . $_POST ["password"] . "\"";
 $sql = "SELECT U1.Uname, Sno, Usexy, Ucredit, Uaddress, Upassword, Uphone, Uemail 
 		FROM U1, U2, U3 
 		WHERE 
@@ -18,7 +18,7 @@ $sql = "SELECT U1.Uname, Sno, Usexy, Ucredit, Uaddress, Upassword, Uphone, Uemai
 $result = $conn -> query ($sql);
 if (mysqli_num_rows ($result)) {
 	$row = $result -> fetch_assoc ();
-	$json = array ("state" => "y");
+	$json = array ("status" => "y");
 	$json ["uname"] = $row ["Uname"];
 	$json ["sno"] = $row ["Sno"];
 	$json ["usexy"] = $row ["Usexy"];
@@ -35,9 +35,10 @@ else {
 			FROM A 
 			WHERE 
 			Ano = $name AND Apassword = $password;";
+	$result = $conn -> query ($sql);
 	if (mysqli_num_rows ($result)) {
 		$row = $result -> fetch_assoc ();
-		$json = array ("state" => "y");
+		$json = array ("status" => "y");
 		$json ["ano"] = $row ["Ano"];
 		$json ["aname"] = $row ["Aname"];
 		$json ["apassword"] = $row ["Apassword"];
@@ -48,7 +49,7 @@ else {
 		echo json_encode ($json);
 	}
 	else {
-		$json = array ("state" => "n");
+		$json = array ("status" => "n");
 		$conn -> close ();
 		echo json_encode ($json);
 	}
