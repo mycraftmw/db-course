@@ -19,14 +19,14 @@ $result = $conn -> query ($sql);
 if (mysqli_num_rows ($result)) {
 	$row = $result -> fetch_assoc ();
 	$json = array ("status" => "y");
-	$json ["uname"] = $row ["Uname"];
-	$json ["sno"] = $row ["Sno"];
-	$json ["usexy"] = $row ["Usexy"];
-	$json ["ucredit"] = $row ["Ucredit"];
+	$json ["name"] = $row ["Uname"];
+	$json ["no"] = $row ["Sno"];
+	$json ["sexy"] = $row ["Usexy"];
+	$json ["credit"] = $row ["Ucredit"];
 	$json ["uaddress"] = $row ["Uaddress"];
-	$json ["upassword"] = $row ["Upassword"];
-	$json ["uphone"] = $row ["Uphone"];
-	$json ["uemail"] = $row ["Uemail"];
+	$json ["password"] = $row ["Upassword"];
+	$json ["phone"] = $row ["Uphone"];
+	$json ["email"] = $row ["Uemail"];
 	$conn -> close ();
 	echo json_encode ($json);
 }
@@ -39,12 +39,12 @@ else {
 	if (mysqli_num_rows ($result)) {
 		$row = $result -> fetch_assoc ();
 		$json = array ("status" => "y");
-		$json ["ano"] = $row ["Ano"];
-		$json ["aname"] = $row ["Aname"];
-		$json ["apassword"] = $row ["Apassword"];
-		$json ["asexy"] = $row ["Asexy"];
-		$json ["aphone"] = $row ["Aphone"];
-		$json ["aemail"] = $row ["Aemail"];
+		$json ["no"] = $row ["Ano"];
+		$json ["name"] = $row ["Aname"];
+		$json ["password"] = $row ["Apassword"];
+		$json ["sexy"] = $row ["Asexy"];
+		$json ["phone"] = $row ["Aphone"];
+		$json ["email"] = $row ["Aemail"];
 		$conn -> close ();
 		echo json_encode ($json);
 	}
