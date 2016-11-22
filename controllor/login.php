@@ -9,8 +9,8 @@ if ($conn -> connect_error) {
 	$json = array ("state" => "n");
 	echo json_encode ($json);
 }
-$name = "\"" . $_GET [0] . "\""; 
-$password = "\"" . $_GET [1] . "\"";
+$name = "\"" . $_GET ["username"] . "\""; 
+$password = "\"" . $_GET ["password"] . "\"";
 $sql = "SELECT U1.Uname, Sno, Usexy, Ucredit, Uaddress, Upassword, Uphone, Uemail 
 		FROM U1, U2, U3 
 		WHERE 
