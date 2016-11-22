@@ -12,7 +12,7 @@ if ($conn -> connect_error) {
 $gname = "\"" . $_POST ["goodsname"] . "\"";	
 $uname = "\"" . $_POST ["username"] . "\"";	
 $gtype = "\"" . $_POST ["type"] . "\"";
-if ($_FILES ["image"]["type"] == "image/jpeg")) {
+if ($_FILES ["image"]["type"] == "image/jpeg") {
 	$gaddress = "image\\user\\" . mt_rand (0, 1000000) . ".jpg";
 	while (file_exists ($gaddress))
 		$gaddress = "image\\user\\" . mt_rand (0, 1000000) . ".jpg";

@@ -27,11 +27,11 @@ $json ["instruction"] = $row ["Ginstruction"];
 $json ["parameter"] = $row ["Gparameter"];
 $json ["time"] = $row ["Gtime"];
 $json ["price"] = $row ["Gprice"];
-$sql = "SELECT Tcontent FROM DES, T WHERE DES.Tno = T.Tno AND Gno = $gno;";
+$sql = "SELECT Tno FROM DES WHERE Gno = $gno;";
 $result = $conn -> query ($sql);
 $tcontent = "";
 while ($row = $result -> fetch_assoc()) 
-	$tcontent = $row ["Tcontent"] . " ";
+	$tcontent = $row ["Tno"] . " ";
 $json ["tag"] = $tcontent;
 $conn -> close ();			
 echo json_encode ($json);

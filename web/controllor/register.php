@@ -23,7 +23,7 @@ if (!(mysqli_num_rows ($result))) {
 	$conn -> close ();			
 	echo json_encode ($json);
 }
-if ($_FILES ["image"]["type"] == "image/jpeg")) {
+if ($_FILES ["image"]["type"] == "image/jpeg") {
 	$uaddress = "image\\user\\" . mt_rand (0, 1000000) . ".jpg";
 	while (file_exists ($uaddress))
 		$uaddress = "image\\user\\" . mt_rand (0, 1000000) . ".jpg";

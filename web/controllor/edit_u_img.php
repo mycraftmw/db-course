@@ -10,7 +10,7 @@ if ($conn -> connect_error) {
 	echo json_encode ($json);
 }
 $uname = "\"" . $_POST ["username"] . "\"";	
-if ($_FILES ["image"]["type"] == "image/jpeg")) {
+if ($_FILES ["image"]["type"] == "image/jpeg") {
 	$uaddress = "image\\user\\" . mt_rand (0, 1000000) . ".jpg";
 	while (file_exists ($uaddress))
 		$uaddress = "image\\user\\" . mt_rand (0, 1000000) . ".jpg";

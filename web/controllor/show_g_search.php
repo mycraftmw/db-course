@@ -13,7 +13,7 @@ $uname = "\"" . $_POST ["username"] . "\"";
 $words = "\"" . $_POST ["words"] . "\"";
 $opr = $_POST ["operate"];	
 $result;
-switch ($kind) {
+switch ($opr) {
 	case 0:
 		$sql = "SELECT DISTINCT G1.Gno, Gname, Gtype, Gaddress, Gtimestamp
 				FROM G1, G2, DES, T
