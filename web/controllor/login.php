@@ -1,7 +1,7 @@
 <?php
 $servername = "127.0.0.1";
 $username = "root";
-$password = "160013";
+$password = "";
 $dbname = "myDB";
 $conn = new mysqli ($servername, $username, $password, $dbname);
 
@@ -45,12 +45,12 @@ else {
 		$json ["aphone"] = $row ["Aphone"];
 		$json ["aemail"] = $row ["Aemail"];
 		$conn -> close ();
-		return json_encode ($json);
+		echo json_encode ($json);
 	}
 	else {
 		$json = array ("state" => "n");
 		$conn -> close ();
-		return json_encode ($json);
+		echo json_encode ($json);
 	}
 }
 ?>
