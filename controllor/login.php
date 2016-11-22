@@ -18,15 +18,15 @@ $sql = "SELECT U1.Uname, Sno, Usexy, Ucredit, Uaddress, Upassword, Uphone, Uemai
 $result = $conn -> query ($sql);
 if (mysqli_num_rows ($result)) {
 	$row = $result -> fetch_assoc ();
-	$_COOKIE ["uname"] = $row ["Uname"];
-	$_COOKIE ["sno"] = $row ["Sno"];
-	$_COOKIE ["usexy"] = $row ["Usexy"];
-	$_COOKIE ["ucredit"] = $row ["Ucredit"];
-	$_COOKIE ["uaddress"] = $row ["Uaddress"];
-	$_COOKIE ["upassword"] = $row ["Upassword"];
-	$_COOKIE ["uphone"] = $row ["Uphone"];
-	$_COOKIE ["uemail"] = $row ["Uemail"];
 	$json = array ("state" => "y");
+	$json ["uname"] = $row ["Uname"];
+	$json ["sno"] = $row ["Sno"];
+	$json ["usexy"] = $row ["Usexy"];
+	$json ["ucredit"] = $row ["Ucredit"];
+	$json ["uaddress"] = $row ["Uaddress"];
+	$json ["upassword"] = $row ["Upassword"];
+	$json ["uphone"] = $row ["Uphone"];
+	$json ["uemail"] = $row ["Uemail"];
 	$conn -> close ();
 	echo json_encode ($json);
 }
@@ -37,13 +37,13 @@ else {
 			Ano = $name AND Apassword = $password;";
 	if (mysqli_num_rows ($result)) {
 		$row = $result -> fetch_assoc ();
-		$_COOKIE ["ano"] = $row ["Ano"];
-		$_COOKIE ["aname"] = $row ["Aname"];
-		$_COOKIE ["apassword"] = $row ["Apassword"];
-		$_COOKIE ["asexy"] = $row ["Asexy"];
-		$_COOKIE ["aphone"] = $row ["Aphone"];
-		$_COOKIE ["aemail"] = $row ["Aemail"];
 		$json = array ("state" => "y");
+		$json ["ano"] = $row ["Ano"];
+		$json ["aname"] = $row ["Aname"];
+		$json ["apassword"] = $row ["Apassword"];
+		$json ["asexy"] = $row ["Asexy"];
+		$json ["aphone"] = $row ["Aphone"];
+		$json ["aemail"] = $row ["Aemail"];
 		$conn -> close ();
 		return json_encode ($json);
 	}
