@@ -17,6 +17,7 @@ $sql = "SELECT G1.Gno, Gname, Uname, Gtype, Gaddress, Ginstruction, Gparameter, 
 		G1.Gno = $gno;";
 $result = $conn -> query ($sql);
 $row = $result -> fetch_assoc();
+$json = array ("status" => "y");
 $json ["no"] = $row ["Gno"];
 $json ["gname"] = $row ["Gname"];
 $json ["name"] = $row ["Uname"];
