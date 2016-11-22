@@ -182,7 +182,7 @@ CHAplancredit INT NOT NULL,
 CHAadoptstate INT NOT NULL,
 CHAadoptcredit INT NOT NULL,
 CHAtimestamp TIMESTAMP NOT NULL,
-FOREIGN KEY (Gnoplan) REFERENCES G1 (Gno)
+FOREIGN KEY (Gnoplan) REFERENCES G1 (Gno),
 FOREIGN KEY (Gnoadopt) REFERENCES G1 (Gno)
 )";
 if ($conn -> query ($sql) === TRUE) 
