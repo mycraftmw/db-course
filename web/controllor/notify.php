@@ -9,22 +9,22 @@ if ($conn -> connect_error) {
 	$json = array ("status" => "n");
 	echo json_encode ($json);
 }
-$gno = $_POST ["goodsno"];
-$gname = "\"" . $_POST ["goodsname"] . "\"";	
-$gtype = "\"" . $_POST ["type"] . "\"";
-$ginstruction = "\"" . $_POST ["instruction"] . "\"";	
-$gparameter = "\"" . $_POST ["parameter"] . "\"";	
-$gtime= $_POST ["time"];	
-$gprice = $_POST ["price"];
+$uname = "\"" . $_POST ["username"] . "\"";	
+$dic = $_POST ["dic"];	
+$mcontent = "\"" . $_POST ["message"] . "\"";
+$sql = "SELECT Mno FROM M ORDER BY Mno DESC;";
+$result = $conn -> query ($sql);
+$row = $result -> fetch_assoc ();
+$mno = $row ["Mno"] + 1;
 $conn -> query ("BEGIN;");
-$sql = "UPDATE G1 SET Gname = $gname, Gtype = $gtype WHERE Gno = $gno;";
+$sql = "INSERT INTO M VALUES ($mno, $mcontent, CURRENT_TIMESTAMP);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");
 	$conn -> close ();			
 	echo json_encode ($json);
 }
-$sql = "UPDATE G3 SET Ginstruction = $ginstruction, Gparameter = $gparameter, Gtime = $gtime, Gprice = $gprice WHERE Gno = $gno;";
+$sql = "INSERT INTO NTI VALUES ($mno, $uname, $dic);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

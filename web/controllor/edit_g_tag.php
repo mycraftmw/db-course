@@ -10,8 +10,8 @@ if ($conn -> connect_error) {
 	$json = array ("status" => "n");
 	echo json_encode ($json);
 }
-$opr = "\"" . $_POST ["operate"] . "\"";
-$gno = "\"" . $_POST ["goodsno"] . "\"";
+$opr = $_POST ["operate"];
+$gno = $_POST ["goodsno"];
 $tno = "\"" . $_POST ["tag"] . "\"";
 $conn -> query ("BEGIN;");
 if ($opr) {

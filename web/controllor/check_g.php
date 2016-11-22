@@ -7,11 +7,13 @@ $conn = new mysqli ($servername, $username, $password, $dbname);
 
 if ($conn -> connect_error) {
 	$json = array ("status" => "n");
+	$json = array ("status" => "n");
 	echo json_encode ($json);
 }
 $gno = $_POST ["goodsno"];
+$gcheck = $_POST ["check"];
 $conn -> query ("BEGIN;");
-$sql = "DELETE FROM G1 VALUES WHERE Gno = $gno;";
+$sql = "UPDATE G2 SET Gcheck = $gcheck, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = $gno;";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

@@ -9,7 +9,7 @@ if ($conn -> connect_error) {
 	$json = array ("status" => "n");
 	echo json_encode ($json);
 }
-$gno = "\"" . $_POST ["goodsno"] . "\"";
+$gno = $_POST ["goodsno"];
 $sql = "SELECT G1.Gno, Gname, Uname, Gtype, Gaddress, Ginstruction, Gparameter, Gtime, Gprice 
 		FROM G1, G3
 		WHERE

@@ -10,13 +10,15 @@ if ($conn -> connect_error) {
 	echo json_encode ($json);
 }
 $gno = $_POST ["goodsno"];
-$conn -> query ("BEGIN;");
-$sql = "DELETE FROM G1 VALUES WHERE Gno = $gno;";
+$state = $_POST ["state"];	
+$credit = $_POST ["credit"];
+$sql = "UPDATE CHA SET CHAplanstate = $state, CHAplancredit = $credit, CHAtimestamp = CURRENT_TIMESTAMP WHERE Gnoplan = $gno;";
+$sql = "UPDATE CHA SET CHAadoptstate = $state, CHAadoptcredit = $credit, CHAtimestamp = CURRENT_TIMESTAMP WHERE Gnoadopt = $gno;";	
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");
 	$conn -> close ();			
-	echo json_encode ($json);
+	echo json_encode ($json);;
 }
 $conn -> query ("COMMIT;");
 $json = array ("status" => "y");

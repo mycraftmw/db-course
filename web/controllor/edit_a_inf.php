@@ -9,9 +9,11 @@ if ($conn -> connect_error) {
 	$json = array ("status" => "n");
 	echo json_encode ($json);
 }
-$gno = $_POST ["goodsno"];
+$ano = "\"" . $_POST ["username"] . "\"";	
+$aphone = "\"" . $_POST ["phone"] . "\"";	
+$aemail = "\"" . $_POST ["email"] . "\"";
 $conn -> query ("BEGIN;");
-$sql = "DELETE FROM G1 VALUES WHERE Gno = $gno;";
+$sql = "UPDATE A SET Aphone = $aphone, Aemail = $aemail WHERE Ano = $ano;";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

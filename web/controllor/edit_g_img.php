@@ -9,7 +9,7 @@ if ($conn -> connect_error) {
 	$json = array ("status" => "n");
 	echo json_encode ($json);
 }
-$gno = "\"" . $_POST ["goodsno"] . "\"";
+$gno = $_POST ["goodsno"];
 if ($_FILES ["image"]["type"] == "image/jpeg")) {
 	$gaddress = "image\\goods\\" . mt_rand (0, 1000000) . ".jpg";
 	while (file_exists ($gaddress))

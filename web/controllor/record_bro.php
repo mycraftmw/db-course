@@ -9,9 +9,11 @@ if ($conn -> connect_error) {
 	$json = array ("status" => "n");
 	echo json_encode ($json);
 }
+$uname = "\"" . $_POST ["username"] . "\"";	
 $gno = $_POST ["goodsno"];
 $conn -> query ("BEGIN;");
-$sql = "DELETE FROM G1 VALUES WHERE Gno = $gno;";
+$sql = "DELETE FROM BRO WHERE Uname = $uname AND Gno = $gno;";
+$sql = "INSERT INTO BRO VALUES ($uname, $gno, CURRENT_TIMESTAMP);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");
