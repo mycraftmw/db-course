@@ -23,7 +23,7 @@ if (mysqli_num_rows ($result)) {
 	$json ["no"] = $row ["Sno"];
 	$json ["sexy"] = $row ["Usexy"];
 	$json ["credit"] = $row ["Ucredit"];
-	$json ["uaddress"] = $row ["Uaddress"];
+	$json ["address"] = $row ["address"];
 	$json ["password"] = $row ["Upassword"];
 	$json ["phone"] = $row ["Uphone"];
 	$json ["email"] = $row ["Uemail"];
