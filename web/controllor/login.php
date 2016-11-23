@@ -20,7 +20,7 @@ $sql = "SELECT U1.Uname, Sno, Uroot, Usexy, Ucredit, Uaddress, Upassword, Uphone
 		U1.Uname = $uname AND 
 		Upassword = $upassword;";
 $result = $conn -> query ($sql);
-if ($result && mysqli_num_rows ($result)) {
+if ($result) {
 	$row = $result -> fetch_assoc ();
 	$json = array ("status" => "y");
 	$json ["uname"] = $row ["Uname"];

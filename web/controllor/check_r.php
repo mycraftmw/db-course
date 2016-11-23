@@ -10,13 +10,13 @@ if ($conn -> connect_error) {
 	echo json_encode ($json);
 	exit;
 }
-$uname = "\"" . $_POST ["uname"] . "\""; 
+$uroot = "\"" . $_POST ["uroot"] . "\""; 
 $rcontent = "\"" . $_POST ["rcontent"] . "\"";
 $sql = "SELECT *
-		FROM U1, UAR, R
+		FROM UAR, R
 		WHERE
-		U1.Uroot = UAR.Uroot AND
 		UAR.rno = R.rno AND
+		Uroot = $uroot AND
 		Rcontent = $rcontent;";
 $result = $conn -> query ($sql);
 if ($result) {
