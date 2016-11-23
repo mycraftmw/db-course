@@ -12,7 +12,7 @@ if ($conn -> connect_error) {
 }
 $opr = $_POST ["operate"];
 $gno = $_POST ["gno"];
-$tno = "\"" . $_POST ["tag"] . "\"";
+$tno = "\"" . $_POST ["tno"] . "\"";
 $conn -> query ("BEGIN;");
 if ($opr) {
 	$sql = "INSERT INTO DES VALUES ($gno, $tno);";
