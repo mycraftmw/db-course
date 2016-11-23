@@ -107,8 +107,8 @@
           <li><a href="market">市场</a></li>
           <li><a id="outlg" data-toggle="modal" data-target="#login" href="#services">登录</a></li>
           <li><a id="outrg" href="user">注册</a></li>
-          <li><a id="inlg" data-toggle="modal" data-target="#login" href="#services">login</a></li>
-          <li><a id="inrg" href="register">register</a></li>
+          <li><a id="inmsg" href="message">消息</a></li>
+          <li><a id="inname" href="user">guo</a></li>          
         </ul>
       </nav>
       <!-- /main nav -->
@@ -446,7 +446,9 @@
   <script src="js/custom.js"></script>
   <script src="js/myjs.js"></script>
   <script>
-    window.onload=modifybar();
+    $(function ($){
+      modifybar();
+    });
   </script>
 </body>
 

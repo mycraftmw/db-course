@@ -1616,3 +1616,7 @@ blockquote {
 .black {
     color: #000
 }
+
+.myfontsize{
+  font-size: 22px;
+}

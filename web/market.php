@@ -49,12 +49,11 @@
   <!-- Ubuntu / Body Font -->
   <link href='http://fonts.useso.com/css?family=Ubuntu:400,300' rel='stylesheet' type='text/css'>
 
-  <!-- Modernizer Script for old Browsers -->
-  <script src="js/modernizr-2.6.2.min.js"></script>
+  
 
 </head>
 
-<body id="body" onload="myfun()">
+<body id="body">
   <!--
         Start Preloader
         ==================================== -->
@@ -81,11 +80,11 @@
       <div class="navbar-header">
         <!-- responsive nav button -->
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
         <!-- /responsive nav button -->
 
         <!-- logo -->
@@ -104,8 +103,8 @@
           <li><a href="market">市场</a></li>
           <li><a id="outlg" data-toggle="modal" data-target="#login" href="#services">登录</a></li>
           <li><a id="outrg" href="user">注册</a></li>
-          <li><a id="inlg" data-toggle="modal" data-target="#login" href="#services">login</a></li>
-          <li><a id="inrg" href="register">register</a></li>
+          <li><a id="inmsg" href="message">消息</a></li>
+          <li><a id="inname" href="user">guo</a></li>          
         </ul>
       </nav>
       <!-- /main nav -->
@@ -162,12 +161,17 @@
 
           <!-- portfolio item filtering -->
           <div class="portfolio-filter clearfix">
+            <input id="searchbar" class="col-xs-6 col-xs-offset-3 black" type="text" name="searchtext" placeholder="搜一下">
+            <a href="javascript:search()">&emsp;&emsp;&emsp;搜索</a>
+            <br>
+            <br>
             <ul class="text-center">
               <li><a href="javascript:void(0)" class="filter" data-filter="all">全部</a></li>
-              <li><a href="javascript:void(0)" class="filter" data-filter=".app">啦啦啦</a></li>
-              <li><a href="javascript:void(0)" class="filter" data-filter=".web">哗哗哗</a></li>
-              <li><a href="javascript:void(0)" class="filter" data-filter=".photoshop">哇哇哇</a></li>
-              <li><a href="javascript:void(0)" class="filter" data-filter=".illustrator">咔咔咔</a></li>
+              <li><a href="javascript:void(0)" class="filter" data-filter=".taga">萌</a></li>
+              <li><a href="javascript:void(0)" class="filter" data-filter=".tagb">时尚</a></li>
+              <li><a href="javascript:void(0)" class="filter" data-filter=".tagc">个性</a></li>
+              <li><a href="javascript:void(0)" class="filter" data-filter=".tagd">实用</a></li>
+              <li><a href="javascript:void(0)" class="filter" data-filter=".tage">品牌</a></li>
             </ul>
           </div>
           <!-- /portfolio item filtering -->
@@ -184,7 +188,7 @@
       <ul id="og-grid" class="og-grid">
 
         <!-- single portfolio item -->
-        <li class="mix app">
+        <li class="mix taga">
           <a href="javascript:void(0)" data-largesrc="img/item/images.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
             <img src="img/item/images.jpg" width="100%">
             <div class="hover-mask">
@@ -196,7 +200,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix web">
+        <li class="mix tagb">
           <a href="javascript:void(0)" data-largesrc="img/item/fdj.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
             <img src="img/item/fdj.jpg" width="100%">
             <div class="hover-mask">
@@ -208,7 +212,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix photoshop">
+        <li class="mix tagc">
           <a href="javascript:void(0)" data-largesrc="img/item/th.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
             <img src="img/item/th.jpg" width="100%">
             <div class="hover-mask">
@@ -220,7 +224,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix illustrator">
+        <li class="mix tagd">
           <a href="javascript:void(0)" data-largesrc="img/item/hu.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
             <img src="img/item/hu.jpg" width="100%">
             <div class="hover-mask">
@@ -232,7 +236,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix app">
+        <li class="mix taga">
           <a href="javascript:void(0)" data-largesrc="img/item/guo.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
             <img src="img/item/guo.jpg" width="100%">
             <div class="hover-mask">
@@ -244,7 +248,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix app">
+        <li class="mix tagc">
           <a href="javascript:void(0)" data-largesrc="img/item/fozhu.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
             <img src="img/item/fozhu.jpg" width="100%">
             <div class="hover-mask">
@@ -256,7 +260,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix web">
+        <li class="mix tage">
           <a href="javascript:void(0)" data-largesrc="img/item/biao.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
             <img src="img/item/biao.jpg" width="100%">
             <div class="hover-mask">
@@ -268,7 +272,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix photoshop">
+        <li class="mix tage">
           <a href="javascript:void(0)" data-largesrc="img/item/shu.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
             <img src="img/item/shu.jpg" width="100%">
             <div class="hover-mask">
@@ -280,7 +284,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix photoshop">
+        <li class="mix tagd">
           <a href="javascript:void(0)" data-largesrc="img/item/tuolaji.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
             <img src="img/item/tuolaji.jpg" width="100%">
             <div class="hover-mask">
@@ -292,7 +296,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix illustrator">
+        <li class="mix taga">
           <a href="javascript:void(0)" data-largesrc="img/item/wang.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
             <img src="img/item/wang.jpg" width="100%">
             <div class="hover-mask">
@@ -304,7 +308,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix web">
+        <!--<li class="mix web">
           <a href="javascript:void(0)" data-largesrc="img/item/titian.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
             <img src="img/item/titian.jpg" width="100%">
             <div class="hover-mask">
@@ -312,11 +316,11 @@
               <span><i class="fa fa-plus fa-2x"></i></span>
             </div>
           </a>
-        </li>
+        </li>-->
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix app">
+        <!--<li class="mix app">
           <a href="javascript:void(0)" data-largesrc="img/item/xiyiji.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
             <img src="img/item/xiyiji.jpg" width="100%">
             <div class="hover-mask">
@@ -324,7 +328,7 @@
               <span><i class="fa fa-plus fa-2x"></i></span>
             </div>
           </a>
-        </li>
+        </li>-->
         <!-- /single portfolio item -->
 
       </ul>
@@ -388,7 +392,8 @@
   <!-- 
         Essential Scripts
         =====================================-->
-
+<!-- Modernizer Script for old Browsers -->
+  <script src="js/modernizr-2.6.2.min.js"></script>
   <!-- Main jQuery -->
 
   <script src="js/jquery-1.11.0.min.js"></script>
@@ -431,7 +436,10 @@
   <script src="js/custom.js"></script>
   <script src="js/myjs.js"></script>
   <script>
-    window.onload=modifybar();
+    $(function ($){      
+      modifybar();
+      fillMarket();
+    });
   </script>
 </body>
 

@@ -105,7 +105,7 @@
         <ul id="nav" class="nav navbar-nav">
           <li><a href="index">首页</a></li>
           <li><a href="market">市场</a></li>
-          <li><a id="outlg" data-toggle="modal" data-target="#login" href="javasript:void(0);">登录</a></li>
+          <li><a id="outlg" data-toggle="modal" data-target="#login" href="#services">登录</a></li>
           <li><a id="outrg" href="user">注册</a></li>
           <li><a id="inmsg" href="message">消息</a></li>
           <li><a id="inname" href="user">guo</a></li>          
@@ -118,66 +118,46 @@
   <!--
         End Fixed Navigation
         ==================================== -->
-
-
-  <div class="container">
-    <div class="row">
-      <h1 class="">个人信息</h1>
-      <hr>
-    </div>
-    <div class="row">
-      <div class="container col-xs-4">
-        <img id='avator' src="img/item/guo.jpg" width="300px" >
-        <br>
-        <input id='upavator' type="file">
-        <button type="button" class="btn btn-xs btn-success" onclick="uploadavator();">上传头像</button>
-      </div>
-      <div class="container col-xs-8">
-        <div class="row text-center">
-          <div class="col-xs-3">
-            <h4>用户名：</h4>
-            <h4>学号：</h4>
-            <h4>性别：</h4>
-            <h4>信誉度：</h4>
-            <h4>电话：</h4>
-            <h4>邮箱：</h4>
-            <h4>用户类型：</h4>
-            <h4>旧密码：</h4>
-            <h4>新密码：</h4>
-            <h4>确认新密码：</h4>
-          </div>
-          <div id="ui" class="col-xs-3">
-            <h4 id="uiname">guo</h4>
-            <h4 id="uisno">14064041</h4>
-            <h4 id="uisex">男</h4>
-            <h4 id="uicredit">不错</h4>
-            <h4 id="uiphone">13000000000</h4>
-            <h4 id="uiemail">daguo@buaa.edu.cn</h4>
-            <h4 id="uiper">管理员</h4>            
-            <input id="uiopw" class="black" type="password" name="old">
-            <input id="uinpw" class="black" type="password" name="new">
-            <input id="uicnpw" class="black" type="password" name="cnew">
-          </div>
+  <!-- 登录模态框（Modal） -->
+  <div id="login" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">×</a>
+          <h3 class="black">登录</h3>
         </div>
-        <div class="row text-center">
-          <div class="col-xs-6">
-            <button type="button" class="btn btn-warning" onclick="changepw()" >修改密码</button>
-          </div>
+        <div class="modal-body">
+          <p>
+            <label class="black">用户名：</label>
+            <input id="lusername" class="black" type="text" name="username" placeholder="username" />
+          </p>
+          <p>
+            <label class="black">密&emsp;码：</label>
+            <input id="luserpw" type="password" name="password" placeholder="password" />
+          </p>
         </div>
-        
+        <div class="modal-footer">
+          <a href="#" class="btn btn-success black" onclick="login()">登录</a>
+          <a href="#" class="btn black " data-dismiss="modal">关闭</a>
+        </div>
       </div>
     </div>
-    <div class="row">
-        <h2>我的物品</h2>
-        <hr>
-        <a class="btn btn-danger" data-toggle="modal" data-target="#uploadmodal" >上传物品</a>
-        <br>
-        <br>
-        <ul id='itemlist'>
-          
-        </ul>
-      </div>
   </div>
+  <div class="container">
+    <h1>消息列表</h1>
+    <hr>
+    <ul>
+      <li>
+        <p>2016/11/11 10:30</p>
+        <p>欢迎使用</p>
+      </li>
+      <li>
+        <p>2016/11/11 10:00</p>
+        <p>注册成功</p>
+      </li>
+    </ul>
+  </div>
+  
 
   <!-- end Contact Area
         ========================================== -->
@@ -218,56 +198,7 @@
 
   <!-- end Footer Area
         ========================================== -->
-  <!-- 登录模态框（Modal） -->
-  <div id="login" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <a class="close" data-dismiss="modal">×</a>
-          <h3 class="black">登录</h3>
-        </div>
-        <div class="modal-body">
-          <p>
-            <label class="black">用户名：</label>
-            <input id="lusername" class="black" type="text" name="username" placeholder="username" />
-          </p>
-          <p>
-            <label class="black">密&emsp;码：</label>
-            <input id="luserpw" type="password" name="password" placeholder="password" />
-          </p>
-        </div>
-        <div class="modal-footer">
-          <a href="#" class="btn btn-success black" onclick="login()">登录</a>
-          <a href="#" class="btn black " data-dismiss="modal">关闭</a>
-        </div>
-      </div>
-    </div>
-  </div>
-    <!-- 登录模态框（Modal） -->
-  <div id="uploadmodal" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <a class="close" data-dismiss="modal">×</a>
-          <h3 class="black">上传</h3>
-        </div>
-        <div class="modal-body">
-          <p>
-            <label class="black">图片</label>
-            <input id='upitemimg' class='black' type="file">
-          </p>
-          <p>
-            <label class="black">描述</label>
-            <input id='upitemdes' class='black' type="text" placeholder='输入物品描述'>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <a href="#" class="btn btn-success black" onclick="uploadItem();">上传</a>
-          <a href="#" class="btn black " data-dismiss="modal">关闭</a>
-        </div>
-      </div>
-    </div>
-  </div>
+
   <!-- 
         Essential Scripts
         =====================================-->
@@ -316,7 +247,6 @@
   <script>
     $(function ($){
       modifybar();
-      fillinfo();
     });
   </script>
 </body>
