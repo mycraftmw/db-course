@@ -8,6 +8,7 @@ $conn = new mysqli ($servername, $username, $password, $dbname);
 if ($conn -> connect_error) {
 	$json = array ("status" => "n");
 	echo json_encode ($json);
+	exit;
 }
 $uname = "\"" . $_POST ["uname"] . "\""; 
 $upassword = "\"" . $_POST ["upassword"] . "\"";
@@ -33,10 +34,12 @@ if ($result && mysqli_num_rows ($result)) {
 	$json ["uemail"] = $row ["Uemail"];
 	$conn -> close ();
 	echo json_encode ($json);
+	exit;
 }
 else {
 	$json = array ("status" => "n");
 	$conn -> close ();
 	echo json_encode ($json);
+	exit;
 }
 ?>
