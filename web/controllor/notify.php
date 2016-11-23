@@ -15,8 +15,12 @@ $unamereceive = "\"" . $_POST ["unamereceive"] . "\"";
 $mcontent = "\"" . $_POST ["mcontent"] . "\"";
 $sql = "SELECT Mno FROM M ORDER BY Mno DESC;";
 $result = $conn -> query ($sql);
-$row = $result -> fetch_assoc ();
-$mno = $row ["Mno"] + 1;
+if ($result) {
+	$row = $result -> fetch_assoc ();
+	$mno = $row ["Mno"] + 1;
+}
+else 
+	$mno = 1;
 $conn -> query ("BEGIN;");
 $sql = "INSERT INTO M VALUES ($mno, $mcontent, CURRENT_TIMESTAMP);";
 if (!($conn -> query ($sql))) {
