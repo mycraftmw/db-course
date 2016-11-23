@@ -13,17 +13,25 @@ if ($conn -> connect_error) {
 $sql = "SELECT Uname, Uroot, Usexy, Ucredit, Uaddress
 		FROM U2;";
 $result = $conn -> query ($sql);
-$json = array ("status" => "y");
-$i = 0;
-while ($row = $result -> fetch_assoc()) {
+if ($result) {
+	$json = array ("status" => "y");
+	$i = 0;
+	while ($row = $result -> fetch_assoc()) {
 		$jsonn = array ();
 		$jsonn ["name"] = $row ["Uname"];
 		$jsonn ["sexy"] = $row ["Usexy"];
 		$jsonn ["credit"] = $row ["Ucredit"];
 		$jsonn ["address"] = $row ["Uaddress"];
 		$json [++$i] = $jsonn;
+	}
+	$conn -> close ();			
+	echo json_encode ($json);
+	exit;
 }
-$conn -> close ();			
-echo json_encode ($json);
-exit;
+else {
+	$conn -> close ();
+	$json = array ("status" => "n");	
+	echo json_encode ($json);
+	exit;
+}
 ?>
