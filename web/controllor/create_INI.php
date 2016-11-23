@@ -11,6 +11,9 @@ if ($conn->connect_error) {
      die("连接失败: " . $conn->connect_error . '<br>');
 } 
 
+$sno = "\"00000000\"";
+$spassword = "\"00000000\"";
+$sql = "INSERT INTO S VALUES ($sno, $spassword);";
 $sno = "\"00000001\"";
 $spassword = "\"00000001\"";
 $sql = "INSERT INTO S VALUES ($sno, $spassword);";
@@ -66,13 +69,20 @@ $cright = 1000;
 $sql = "INSERT INTO C VALUES ($clevel, $cleft, $cright);";
 $conn -> query ($sql);
 
-$ano = "\"00000000\"";
-$aname = "\"亚当.肖华\"";
-$apassword = "\"00000000\"";
-$asexy = 1;
-$aphone = "\"00000000000\"";
-$aemail = "\"00000000000@nba.com\"";
-$sql = "INSERT INTO A VALUES ($ano, $aname, $apassword, $asexy, $aphone, $aemail);";
+$uname = "\"亚当.肖华\"";
+$sno = "\"00000000\"";
+$uroot = "\"管理员\"";
+$usexy = "\"男\"";
+$ucredit = 1000;
+$uaddress = "\"\"";
+$upassword = "\"00000000\"";
+$uphone = "\"00000000000\"";
+$uemail = "\"00000000000@nba.com\"";
+$sql = "INSERT INTO U1 VALUES ($uname, $sno, $uroot);";
+$conn -> query ($sql);
+$sql = "INSERT INTO U2 VALUES ($uname, $usexy, $ucredit, $uaddress);";
+$conn -> query ($sql);
+$sql = "INSERT INTO U3 VALUES ($uname, $upassword, $uphone, $uemail);";
 $conn -> query ($sql);
 
 $rno = 1;
@@ -105,13 +115,13 @@ $tcontent = "\"品牌\"";
 $sql = "INSERT INTO T VALUES ($tno, $tcontent);";
 $conn -> query ($sql);
 
-$ua = 0;
-$Rno = 2;
-$sql = "INSERT INTO UAR VALUES ($ua, $rno);";
+$uroot = "\"用户\"";
+$rno = 2;
+$sql = "INSERT INTO UAR VALUES ($uroot, $rno);";
 $conn -> query ($sql);
-$ua = 1;
-$Rno = 1;
-$sql = "INSERT INTO UAR VALUES ($ua, $rno);";
+$uroot = "\"管理员\"";
+$rno = 1;
+$sql = "INSERT INTO UAR VALUES ($uroot, $rno);";
 $conn -> query ($sql);
 
 $conn->close();

@@ -20,7 +20,8 @@ else
 // 使用 sql 创建 U1 数据表
 $sql = "CREATE TABLE U1 (
 Uname VARCHAR (40) PRIMARY KEY, 
-Sno CHAR (8) UNIQUE NOT NULL,
+Sno CHAR (8) NOT NULL,
+Uroot VARCHAR (40) NOT NULL,
 FOREIGN KEY (Sno) REFERENCES S (Sno)
 )";
 if ($conn -> query ($sql) === TRUE) 
@@ -32,7 +33,7 @@ $sql = "CREATE TABLE U2 (
 Uname VARCHAR (40) PRIMARY KEY, 
 Usexy VARCHAR (40) NOT NULL,
 Ucredit INT NOT NULL,
-Uaddress VARCHAR (40) UNIQUE NOT NULL
+Uaddress VARCHAR (40) 
 )";
 if ($conn -> query ($sql) === TRUE) 
     echo "Table U2 created successfully" . '<br>';
@@ -59,19 +60,6 @@ if ($conn -> query ($sql) === TRUE)
     echo "Table C created successfully" . '<br>';
 else 
     echo "创建数据表 C 错误: " . $conn -> error . '<br>';
-// 使用 sql 创建 A 数据表
-$sql = "CREATE TABLE A (
-Ano CHAR (8) PRIMARY KEY,
-Aname VARCHAR (40) NOT NULL, 
-Apassword VARCHAR (40) NOT NULL,
-Asexy VARCHAR (40) NOT NULL,
-Aphone CHAR (11) UNIQUE NOT NULL,
-Aemail VARCHAR (40) UNIQUE NOT NULL
-)";
-if ($conn -> query ($sql) === TRUE) 
-    echo "Table A created successfully" . '<br>';
-else 
-    echo "创建数据表 A 错误: " . $conn -> error . '<br>';
 // 使用 sql 创建 R 数据表
 $sql = "CREATE TABLE R (
 Rno INT PRIMARY KEY, 
@@ -88,7 +76,7 @@ Gname VARCHAR (40) NOT NULL,
 Uname VARCHAR (40) NOT NULL,
 Gtype VARCHAR (40) NOT NULL,
 Gaddress VARCHAR (40) UNIQUE NOT NULL,
-Gstate INT NOT NULL,
+Gstate VARCHAR (40) NOT NULL,
 FOREIGN KEY (Uname) REFERENCES U1 (Uname)
 )";
 if ($conn -> query ($sql) === TRUE) 
@@ -98,7 +86,7 @@ else
 // 使用 sql 创建 G2 数据表
 $sql = "CREATE TABLE G2 (
 Gno INT PRIMARY KEY,
-Gcheck INT NOT NULL,
+Gcheck VARCHAR (40) NOT NULL,
 Gtimestamp TIMESTAMP NOT NULL
 )";
 if ($conn -> query ($sql) === TRUE) 
@@ -138,9 +126,9 @@ else
     echo "创建数据表 M 错误: " . $conn -> error . '<br>';
 // 使用 sql 创建 UAR 数据表
 $sql = "CREATE TABLE UAR (
-UA INT, 
+Uroot VARCHAR (40), 
 Rno INT,
-PRIMARY KEY (UA, Rno),
+PRIMARY KEY (Uroot, Rno),
 FOREIGN KEY (Rno) REFERENCES R (Rno)
 )";
 if ($conn -> query ($sql) === TRUE) 
@@ -177,9 +165,9 @@ $sql = "CREATE TABLE CHA (
 Gnoplan INT PRIMARY KEY, 
 Gnoadopt INT UNIQUE NOT NULL,
 CHAmoney INT NOT NULL,
-CHAplanstate INT NOT NULL,
+CHAplanstate VARCHAR (40) NOT NULL,
 CHAplancredit INT NOT NULL,
-CHAadoptstate INT NOT NULL,
+CHAadoptstate VARCHAR (40) NOT NULL,
 CHAadoptcredit INT NOT NULL,
 CHAtimestamp TIMESTAMP NOT NULL,
 FOREIGN KEY (Gnoplan) REFERENCES G1 (Gno),
@@ -192,9 +180,10 @@ else
 // 使用 sql 创建NTI数据表
 $sql = "CREATE TABLE NTI (
 Mno INT PRIMARY KEY, 
-Uname VARCHAR (40) NOT NULL,
-UA INT NOT NULL,
-FOREIGN KEY (Uname) REFERENCES U1 (Uname)
+Unamesend VARCHAR (40) NOT NULL,
+Unamereceive VARCHAR (40) NOT NULL,
+FOREIGN KEY (Unamesend) REFERENCES U1 (Uname),
+FOREIGN KEY (Unamereceive) REFERENCES U1 (Uname)
 )";
 if ($conn -> query ($sql) === TRUE) 
     echo "Table NTI created successfully" . '<br>';

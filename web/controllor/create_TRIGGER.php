@@ -9,6 +9,16 @@ $conn = new mysqli ($servername, $username, $password, $dbname);
 // 检测连接
 if ($conn -> connect_error) 
      die ("连接失败: " . $conn -> connect_error . '<br>');
+ 
+$str_1 = "\"审核中\"";
+$str_2 = "\"市场中\"";
+$str_3 = "\"交易中\"";
+$str_4 = "\"正在审核\"";
+$str_5 = "\"审核通过\"";
+$str_6 = "\"审核失败\"";
+$str_7 = "\"正在交易\"";
+$str_8 = "\"交易成功\"";
+$str_9 = "\"交易失败\"";
 
 //S表触发器
 $sql = "CREATE TRIGGER TR1 AFTER DELETE ON S FOR EACH ROW
@@ -40,7 +50,7 @@ else
 //G1表触发器
 $sql = "CREATE TRIGGER TR3 AFTER INSERT ON G1 FOR EACH ROW
 BEGIN
-INSERT INTO G2 VALUES (NEW.Gno, 0, CURRENT_TIMESTAMP);
+INSERT INTO G2 VALUES (NEW.Gno, $str_4, CURRENT_TIMESTAMP);
 END";
 
 if ($conn -> query ($sql) === TRUE) 
@@ -51,9 +61,9 @@ else
 $sql = "CREATE TRIGGER TR4 AFTER UPDATE ON G1 FOR EACH ROW
 BEGIN
 IF NEW.Gname != OLD.Gname OR NEW.Gtype != OLD.Gtype OR NEW.Gaddress != OLD.Gaddress  THEN
-	UPDATE G2 SET Gcheck = 0, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
+	UPDATE G2 SET Gcheck = $str_4, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
 END IF;
-IF NEW.Gstate != OLD.Gstate AND NEW.Gstate = 1 THEN
+IF NEW.Gstate != OLD.Gstate AND NEW.Gstate = $str_2 THEN
 	DELETE FROM CHA WHERE Gnoplan = NEW.Gno OR Gnoadopt = NEW.Gno;
 END IF;
 END";
@@ -81,10 +91,10 @@ else
 //G2表触发器
 $sql = "CREATE TRIGGER TR6 AFTER UPDATE ON G2 FOR EACH ROW
 BEGIN
-IF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = 1 THEN
-	UPDATE G1 SET Gstate = 1 WHERE Gno = NEW.Gno;
-ELSEIF NEW.Gcheck != OLD.Gcheck AND (NEW.Gcheck = 0 OR NEW.Gcheck = 2) THEN
-	UPDATE G1 SET Gstate = 0 WHERE Gno = NEW.Gno;
+IF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = $str_5 THEN
+	UPDATE G1 SET Gstate = $str_2 WHERE Gno = NEW.Gno;
+ELSEIF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = $str_4 THEN
+	UPDATE G1 SET Gstate = $str_1 WHERE Gno = NEW.Gno;
 END IF;
 END";
 
@@ -97,7 +107,7 @@ else
 $sql = "CREATE TRIGGER TR7 AFTER UPDATE ON G3 FOR EACH ROW
 BEGIN
 IF NEW.Ginstruction != OLD.Ginstruction OR NEW.Gparameter != OLD.Gparameter OR NEW.Gtime != OLD.Gtime OR NEW.Gprice != old.Gprice THEN
-	UPDATE G2 SET Gcheck = 0, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
+	UPDATE G2 SET Gcheck = $str_4, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
 END IF;
 END";
 
@@ -131,7 +141,7 @@ else
 //DES表触发器
 $sql = "CREATE TRIGGER TR10 AFTER INSERT ON DES FOR EACH ROW
 BEGIN
-UPDATE G2 SET Gcheck = 0, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
+UPDATE G2 SET Gcheck = $str_4, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
 END";
 
 if ($conn -> query($sql) === TRUE) 
@@ -142,7 +152,7 @@ else
 //CHA表触发器
 $sql = "CREATE TRIGGER TR11 AFTER INSERT ON CHA FOR EACH ROW
 BEGIN
-UPDATE G1 SET Gstate = 2 WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
+UPDATE G1 SET Gstate = $str_3 WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
 END";
 
 if ($conn->query($sql) === TRUE) 
@@ -152,13 +162,13 @@ else
 
 $sql = "CREATE TRIGGER TR12 AFTER UPDATE ON CHA FOR EACH ROW
 BEGIN
-IF NEW.CHAplanstate = 1 AND NEW.CHAadoptstate = 1 THEN
+IF NEW.CHAplanstate = $str_8 AND NEW.CHAadoptstate = $str_8 THEN
 	UPDATE U2 SET Ucredit = Ucredit + NEW.CHAadoptcredit WHERE Uname IN (SELECT Uname FROM G1 WHERE Gno = NEW.Gnoplan);
 	UPDATE U2 SET Ucredit = Ucredit + NEW.CHAplancredit WHERE Uname IN (SELECT Uname FROM G1 WHERE Gno = NEW.Gnoadopt);
 	DELETE FROM G1 WHERE Gno = Gnoplan OR Gno = Gnoadopt;
 END IF;
-IF NEW.CHAplanstate = 2 AND NEW.CHAadoptstate = 2 THEN
-	UPDATE G1 SET Gstate = 1 WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
+IF NEW.CHAplanstate = $str_9 AND NEW.CHAadoptstate = $str_9 THEN
+	UPDATE G1 SET Gstate = $str_2 WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
 END IF;
 END";
 
