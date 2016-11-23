@@ -10,18 +10,20 @@ if ($conn -> connect_error) {
 	echo json_encode ($json);
 	exit;
 }
-$sql = "SELECT Uname, Uroot, Usexy, Ucredit, Uaddress
-		FROM U2;";
+$sql = "SELECT User_1.Uname, Uroot, Usexy, Ucredit, Uaddress
+		FROM User_1, User_2
+		WHERE 
+		User_1.Uname = User_2.Uname;";
 $result = $conn -> query ($sql);
 if ($result) {
 	$json = array ("status" => "y");
 	$i = 0;
 	while ($row = $result -> fetch_assoc()) {
 		$jsonn = array ();
-		$jsonn ["name"] = $row ["Uname"];
-		$jsonn ["sexy"] = $row ["Usexy"];
-		$jsonn ["credit"] = $row ["Ucredit"];
-		$jsonn ["address"] = $row ["Uaddress"];
+		$jsonn ["uname"] = $row ["Uname"];
+		$jsonn ["usexy"] = $row ["Usexy"];
+		$jsonn ["ucredit"] = $row ["Ucredit"];
+		$jsonn ["uaddress"] = $row ["Uaddress"];
 		$json [++$i] = $jsonn;
 	}
 	$conn -> close ();			

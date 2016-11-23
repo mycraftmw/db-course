@@ -15,17 +15,11 @@ $gno = $_POST ["gno"];
 $tno = "\"" . $_POST ["tno"] . "\"";
 $conn -> query ("BEGIN;");
 if ($opr) {
-	$sql = "INSERT INTO DES VALUES ($gno, $tno);";
-	if (!($conn -> query ($sql))) {
-		$conn -> query ("ROLLBACK;");
-		$json = array ("status" => "n");
-		$conn -> close ();			
-		echo json_encode ($json);
-		exit;
-	}
+	$sql = "INSERT INTO Describle VALUES ($gno, $tno);";
+	$conn -> query ($sql);
 }
 else {
-	$sql = "DELETE FROM DES WHERE Gno = $gno AND Tno = $tno;";
+	$sql = "DELETE FROM Describle WHERE Gno = $gno AND Tno = $tno;";
 	if (!($conn -> query ($sql))) {
 		$conn -> query ("ROLLBACK;");
 		$json = array ("status" => "n");

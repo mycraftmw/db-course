@@ -11,10 +11,10 @@ if ($conn -> connect_error) {
 	exit;
 }	
 $str = "\"审核中\"";
-$sql = "SELECT DISTINCT G1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
-		FROM G1, G2
+$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
+		FROM Goods_1, Goods_2
 		WHERE
-		G1.Gno = G2.Gno AND 
+		Goods_1.Gno = Goods_2.Gno AND 
 		Gstate = $str
 		ORDER BY Gtimestamp DESC;";		
 $result = $conn -> query ($sql);

@@ -18,7 +18,7 @@ $gparameter = "\"" . $_POST ["gparameter"] . "\"";
 $gtime= $_POST ["gtime"];	
 $gprice = $_POST ["gprice"];
 $conn -> query ("BEGIN;");
-$sql = "UPDATE G1 SET Gname = $gname, Gtype = $gtype WHERE Gno = $gno;";
+$sql = "UPDATE Goods_1 SET Gname = $gname, Gtype = $gtype WHERE Gno = $gno;";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");
@@ -26,7 +26,7 @@ if (!($conn -> query ($sql))) {
 	echo json_encode ($json);
 	exit;
 }
-$sql = "UPDATE G3 SET Ginstruction = $ginstruction, Gparameter = $gparameter, Gtime = $gtime, Gprice = $gprice WHERE Gno = $gno;";
+$sql = "UPDATE Goods_3 SET Ginstruction = $ginstruction, Gparameter = $gparameter, Gtime = $gtime, Gprice = $gprice WHERE Gno = $gno;";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

@@ -13,7 +13,7 @@ if ($conn -> connect_error) {
 $unamesend = "\"" . $_POST ["unamesend"] . "\"";	
 $unamereceive = "\"" . $_POST ["unamereceive"] . "\"";	
 $mcontent = "\"" . $_POST ["mcontent"] . "\"";
-$sql = "SELECT Mno FROM M ORDER BY Mno DESC;";
+$sql = "SELECT Mno FROM Message ORDER BY Mno DESC;";
 $result = $conn -> query ($sql);
 if ($result) {
 	$row = $result -> fetch_assoc ();
@@ -22,7 +22,7 @@ if ($result) {
 else 
 	$mno = 1;
 $conn -> query ("BEGIN;");
-$sql = "INSERT INTO M VALUES ($mno, $mcontent, CURRENT_TIMESTAMP);";
+$sql = "INSERT INTO Message VALUES ($mno, $mcontent, CURRENT_TIMESTAMP);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");
@@ -30,7 +30,7 @@ if (!($conn -> query ($sql))) {
 	echo json_encode ($json);
 	exit;
 }
-$sql = "INSERT INTO NTI VALUES ($mno, $unamesend, $unamereceive);";
+$sql = "INSERT INTO Notify VALUES ($mno, $unamesend, $unamereceive);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

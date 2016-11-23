@@ -25,7 +25,7 @@ else {
 	exit;
 }
 $conn -> query ("BEGIN;");
-$sql = "UPDATE U2 SET Uaddress = $uaddress WHERE Uname = $uname;";
+$sql = "UPDATE User_2 SET Uaddress = $uaddress WHERE Uname = $uname;";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

@@ -15,7 +15,7 @@ $gnoadopt = $_POST ["gnoadopt"];
 $chamoney = $_POST ["chamoney"];
 $chaplanstate = "\"等待交易\"";
 $chaadoptstate = "\"等待交易\"";
-$sql = "INSERT INTO CHA VALUES ($gnoplan, $gnoadopt, $chamoney, $chaplanstate, 0, $chaadoptstate, 0, CURRENT_TIMESTAMP);";
+$sql = "INSERT INTO Charge VALUES ($gnoplan, $gnoadopt, $chamoney, $chaplanstate, 0, $chaadoptstate, 0, CURRENT_TIMESTAMP);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

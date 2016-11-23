@@ -16,7 +16,7 @@ $uname = "\"" . $_POST ["uname"] . "\"";
 $uroot = "\"用户\"";
 $usexy = "\"" . $_POST ["usexy"] . "\"";
 $sql = "SELECT * 
-		FROM S 
+		FROM Student 
 		WHERE 
 		Sno = $sno AND Spassword = $spassword;";
 $result = $conn -> query ($sql);
@@ -31,7 +31,7 @@ $upassword = "\"" . $_POST ["upassword"] . "\"";
 $uphone = "\"" . $_POST ["uphone"] . "\"";	
 $uemail = "\"" . $_POST ["uemail"] . "\"";
 $conn -> query ("BEGIN;");
-$sql = "INSERT INTO U1 VALUES ($uname, $sno, $uroot);";
+$sql = "INSERT INTO User_1 VALUES ($uname, $sno, $uroot);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");
@@ -39,7 +39,7 @@ if (!($conn -> query ($sql))) {
 	echo json_encode ($json);
 	exit;
 }
-$sql = "INSERT INTO U2 VALUES ($uname, $usexy, 60, $uaddress);";
+$sql = "INSERT INTO User_2 VALUES ($uname, $usexy, 60, $uaddress);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");
@@ -47,7 +47,7 @@ if (!($conn -> query ($sql))) {
 	echo json_encode ($json);
 	exit;
 }
-$sql = "INSERT INTO U3 VALUES ($uname, $upassword, $uphone, $uemail);";
+$sql = "INSERT INTO User_3 VALUES ($uname, $upassword, $uphone, $uemail);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

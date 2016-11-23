@@ -12,9 +12,9 @@ if ($conn -> connect_error) {
 }
 $uname = "\"" . $_POST ["uname"] . "\"";	
 $sql = "SELECT Mcontent, Mtimestamp, Unamesend, Unamereceive 
-		FROM M, NTI 
+		FROM Message, Notify 
 		WHERE
-		M.Mno = NTI.Mno AND
+		Message.Mno = Notify.Mno AND
 		(Unamesend = $uname OR Unamereceive = $uname) 
 		ORDER BY Mtimestamp DESC;";
 $result = $conn -> query ($sql);

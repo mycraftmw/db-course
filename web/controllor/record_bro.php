@@ -13,9 +13,9 @@ if ($conn -> connect_error) {
 $uname = "\"" . $_POST ["uname"] . "\"";	
 $gno = $_POST ["gno"];
 $conn -> query ("BEGIN;");
-$sql = "DELETE FROM BRO WHERE Uname = $uname AND Gno = $gno;";
+$sql = "DELETE FROM Search WHERE Uname = $uname AND Gno = $gno;";
 $conn -> query ($sql);
-$sql = "INSERT INTO BRO VALUES ($uname, $gno, CURRENT_TIMESTAMP);";
+$sql = "INSERT INTO Search VALUES ($uname, $gno, CURRENT_TIMESTAMP);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

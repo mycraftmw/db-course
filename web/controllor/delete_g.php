@@ -12,7 +12,7 @@ if ($conn -> connect_error) {
 }
 $gno = $_POST ["gno"];
 $conn -> query ("BEGIN;");
-$sql = "DELETE FROM G1 VALUES WHERE Gno = $gno;";
+$sql = "DELETE FROM Goods_1 WHERE Gno = $gno;";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

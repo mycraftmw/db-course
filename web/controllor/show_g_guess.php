@@ -12,24 +12,24 @@ if ($conn -> connect_error) {
 }
 $uname = "\"" . $_POST ["uname"] . "\"";	
 $str = "\"市场中\"";
-$sql = "SELECT DISTINCT G1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
-		FROM G1, G2
+$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
+		FROM Goods_1, Goods_2
 		WHERE
-		G1.Gno = G2.Gno AND 
+		Goods_1.Gno = Goods_2.Gno AND 
 		Gstate = $str AND
 		Uname != $uname AND
-		G1.Gno NOT IN (SELECT Gno FROM BRO WHERE Uname = $uname ORDER BY BROtimestamp DESC LIMIT 10) AND
-		Gtype IN (SELECT Gtype FROM G1, BRO WHERE G1.Gno = BRO.Gno AND BRO.Uname = $uname ORDER BY BROtimestamp DESC LIMIT 10)
+		Goods_1.Gno NOT IN (SELECT Gno FROM Search WHERE Uname = $uname ORDER BY BROtimestamp DESC) AND
+		Gtype IN (SELECT Gtype FROM Goods_1, Search WHERE Goods_1.Gno = Search.Gno AND Search.Uname = $uname ORDER BY BROtimestamp DESC)
 		ORDER BY Gtimestamp DESC;";		
 $result_1 = $conn -> query ($sql);
-$sql = "SELECT DISTINCT G1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
-		FROM G1, G2
+$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
+		FROM Goods_1, Goods_2
 		WHERE
-		G1.Gno = G2.Gno AND 
+		Goods_1.Gno = Goods_2.Gno AND 
 		Gstate = $str AND
 		Uname != $uname AND
-		G1.Gno NOT IN (SELECT Gno FROM BRO WHERE Uname = $uname ORDER BY BROtimestamp DESC LIMIT 10) AND
-		Gtype NOT IN (SELECT Gtype FROM G1, BRO WHERE G1.Gno = BRO.Gno AND BRO.Uname = $uname ORDER BY BROtimestamp DESC LIMIT 10)
+		Goods_1.Gno NOT IN (SELECT Gno FROM Search WHERE Uname = $uname ORDER BY BROtimestamp DESC) AND
+		Gtype NOT IN (SELECT Gtype FROM Goods_1, Search WHERE Goods_1.Gno = Search.Gno AND Search.Uname = $uname ORDER BY BROtimestamp DESC)
 		ORDER BY Gtimestamp DESC;";		
 $result_2 = $conn -> query ($sql);
 if ($result_1 || $result_2) {

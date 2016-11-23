@@ -445,6 +445,7 @@
   <!-- Custom js -->
   <script src="js/custom.js"></script>
   <script src="js/myjs.js"></script>
+  <script src="js/test.js"></script>
   <script>
     $(function ($){
       modifybar();

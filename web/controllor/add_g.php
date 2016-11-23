@@ -31,7 +31,7 @@ $ginstruction = "\"" . $_POST ["ginstruction"] . "\"";
 $gparameter = "\"" . $_POST ["gparameter"] . "\"";	
 $gtime= $_POST ["gtime"];	
 $gprice = $_POST ["gprice"];
-$sql = "SELECT Gno FROM G1 ORDER BY Gno DESC;";
+$sql = "SELECT Gno FROM Goods_1 ORDER BY Gno DESC;";
 $result = $conn -> query ($sql);
 if ($result) {
 	$row = $result -> fetch_assoc ();
@@ -40,15 +40,15 @@ if ($result) {
 else
 	$gno = 1;
 $conn -> query ("BEGIN;");
-$sql = "INSERT INTO G1 VALUES ($gno, $gname, $uname, $gtype, $gaddress, $gstate);";
+$sql = "INSERT INTO Goods_1 VALUES ($gno, $gname, $uname, $gtype, $gaddress, $gstate);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
-	$json = array ("status" => "n");
+	$json = array ("status" => "n1");
 	$conn -> close ();			
 	echo json_encode ($json);
 	exit;
 }
-$sql = "INSERT INTO G3 VALUES ($gno, $ginstruction, $gparameter, $gtime, $gprice);";
+$sql = "INSERT INTO Goods_3 VALUES ($gno, $ginstruction, $gparameter, $gtime, $gprice);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

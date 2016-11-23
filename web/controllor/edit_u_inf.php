@@ -15,7 +15,7 @@ $upassword = "\"" . $_POST ["upassword"] . "\"";
 $uphone = "\"" . $_POST ["uphone"] . "\"";	
 $uemail = "\"" . $_POST ["uemail"] . "\"";
 $conn -> query ("BEGIN;");
-$sql = "UPDATE U3 SET Upassword = $upassword, Uphone = $uphone, Uemail = $uemail WHERE Uname = $uname;";
+$sql = "UPDATE User_3 SET Upassword = $upassword, Uphone = $uphone, Uemail = $uemail WHERE Uname = $uname;";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

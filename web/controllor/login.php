@@ -12,12 +12,12 @@ if ($conn -> connect_error) {
 }
 $uname = "\"" . $_POST ["uname"] . "\""; 
 $upassword = "\"" . $_POST ["upassword"] . "\"";
-$sql = "SELECT U1.Uname, Sno, Uroot, Usexy, Ucredit, Uaddress, Upassword, Uphone, Uemail 
-		FROM U1, U2, U3 
+$sql = "SELECT User_1.Uname, Sno, Uroot, Usexy, Ucredit, Uaddress, Upassword, Uphone, Uemail 
+		FROM User_1, User_2, User_3 
 		WHERE 
-		U1.Uname = U2.Uname AND
-		U1.Uname = U3.Uname AND
-		U1.Uname = $uname AND 
+		User_1.Uname = User_2.Uname AND
+		User_1.Uname = User_3.Uname AND
+		User_1.Uname = $uname AND 
 		Upassword = $upassword;";
 $result = $conn -> query ($sql);
 if ($result) {

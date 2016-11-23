@@ -13,9 +13,9 @@ if ($conn -> connect_error) {
 $uroot = "\"" . $_POST ["uroot"] . "\""; 
 $rcontent = "\"" . $_POST ["rcontent"] . "\"";
 $sql = "SELECT *
-		FROM UAR, R
+		FROM User_Administrator_Root, Root
 		WHERE
-		UAR.rno = R.rno AND
+		User_Administrator_Root.rno = Root.rno AND
 		Uroot = $uroot AND
 		Rcontent = $rcontent;";
 $result = $conn -> query ($sql);

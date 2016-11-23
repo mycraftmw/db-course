@@ -13,7 +13,7 @@ if ($conn -> connect_error) {
 $gno = $_POST ["gno"];
 $gcheck = "\"" . $_POST ["gcheck"] . "\"";
 $conn -> query ("BEGIN;");
-$sql = "UPDATE G2 SET Gcheck = $gcheck, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = $gno;";
+$sql = "UPDATE Goods_2 SET Gcheck = $gcheck, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = $gno;";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");

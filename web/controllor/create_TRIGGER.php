@@ -20,173 +20,173 @@ $str_7 = "\"正在交易\"";
 $str_8 = "\"交易成功\"";
 $str_9 = "\"交易失败\"";
 
-//S表触发器
-$sql = "CREATE TRIGGER TR1 AFTER DELETE ON S FOR EACH ROW
+//Student表触发器
+$sql = "CREATE TRIGGER TR_delete_student AFTER DELETE ON Student FOR EACH ROW
 BEGIN
-DELETE FROM U2 WHERE Uname IN (SELECT Uname FROM U1 WHERE Sno = OLD.Sno);
-DELETE FROM U3 WHERE Uname IN (SELECT Uname FROM U1 WHERE Sno = OLD.Sno);
-DELETE FROM G1 WHERE Uname IN (SELECT Uname FROM U1 WHERE Sno = OLD.Sno);
-DELETE FROM BRO WHERE Uname IN (SELECT Uname FROM U1 WHERE Sno = OLD.Sno); 
-DELETE FROM NTI WHERE Uname IN (SELECT Uname FROM U1 WHERE Sno = OLD.Sno);
-DELETE FROM U1 WHERE Sno = OLD.Sno;
+DELETE FROM User_2 WHERE Uname IN (SELECT Uname FROM User_1 WHERE Sno = OLD.Sno);
+DELETE FROM User_3 WHERE Uname IN (SELECT Uname FROM User_1 WHERE Sno = OLD.Sno);
+DELETE FROM Goods_1 WHERE Uname IN (SELECT Uname FROM User_1 WHERE Sno = OLD.Sno);
+DELETE FROM Search WHERE Uname IN (SELECT Uname FROM User_1 WHERE Sno = OLD.Sno); 
+DELETE FROM Notify WHERE Uname IN (SELECT Uname FROM User_1 WHERE Sno = OLD.Sno);
+DELETE FROM User_1 WHERE Sno = OLD.Sno;
 END";
 
 if ($conn -> query ($sql) === TRUE) 
-    echo "TRIGGER TR1 created successfully" . '<br>';
+    echo "TRIGGER TR_delete_student created successfully" . '<br>';
 else 
-    echo "创建触发器 TR1 错误: " . $conn -> error . '<br>';
+    echo "创建触发器 TR_delete_student 错误: " . $conn -> error . '<br>';
 
-//R表触发器
-$sql = "CREATE TRIGGER TR2 AFTER DELETE ON R FOR EACH ROW
+//Root表触发器
+$sql = "CREATE TRIGGER TR_delete_root AFTER DELETE ON Root FOR EACH ROW
 BEGIN
-DELETE FROM UAR WHERE Rno = OLD.Rno;
+DELETE FROM User_Administrator_Root WHERE Rno = OLD.Rno;
 END";
 
 if ($conn -> query ($sql) === TRUE)
-    echo "TRIGGER TR2 created successfully" . '<br>';
+    echo "TRIGGER TR_delete_root created successfully" . '<br>';
 else 
-    echo "创建触发器 TR2 错误: " . $conn -> error . '<br>';
+    echo "创建触发器 TR_delete_root 错误: " . $conn -> error . '<br>';
 
-//G1表触发器
-$sql = "CREATE TRIGGER TR3 AFTER INSERT ON G1 FOR EACH ROW
+//Goods_1表触发器
+$sql = "CREATE TRIGGER TR_add_goods AFTER INSERT ON Goods_1 FOR EACH ROW
 BEGIN
-INSERT INTO G2 VALUES (NEW.Gno, $str_4, CURRENT_TIMESTAMP);
+INSERT INTO Goods_2 VALUES (NEW.Gno, $str_4, CURRENT_TIMESTAMP);
 END";
 
 if ($conn -> query ($sql) === TRUE) 
-    echo "TRIGGER TR3 created successfully" . '<br>';
+    echo "TRIGGER TR_add_goods created successfully" . '<br>';
 else 
-    echo "创建触发器 TR3 错误: " . $conn -> error . '<br>';
+    echo "创建触发器 TR_add_goods 错误: " . $conn -> error . '<br>';
 
-$sql = "CREATE TRIGGER TR4 AFTER UPDATE ON G1 FOR EACH ROW
+$sql = "CREATE TRIGGER TR_goods_state AFTER UPDATE ON Goods_1 FOR EACH ROW
 BEGIN
 IF NEW.Gname != OLD.Gname OR NEW.Gtype != OLD.Gtype OR NEW.Gaddress != OLD.Gaddress  THEN
-	UPDATE G2 SET Gcheck = $str_4, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
+	UPDATE Goods_2 SET Gcheck = $str_4, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
 END IF;
 IF NEW.Gstate != OLD.Gstate AND NEW.Gstate = $str_2 THEN
-	DELETE FROM CHA WHERE Gnoplan = NEW.Gno OR Gnoadopt = NEW.Gno;
+	DELETE FROM Charge WHERE Gnoplan = NEW.Gno OR Gnoadopt = NEW.Gno;
 END IF;
 END";
 
 if ($conn->query($sql) === TRUE) {
-    echo "TRIGGER TR4 created successfully".'<br>';
+    echo "TRIGGER TR_goods_state created successfully".'<br>';
 } else {
-    echo "创建触发器 TR4 错误: " . $conn->error . '<br>';
+    echo "创建触发器 TR_goods_state 错误: " . $conn->error . '<br>';
 }
 
-$sql = "CREATE TRIGGER TR5 AFTER DELETE ON G1 FOR EACH ROW
+$sql = "CREATE TRIGGER TR_delete_goods AFTER DELETE ON Goods_1 FOR EACH ROW
 BEGIN
-DELETE FROM G2 WHERE Gno = OLD.Gno;
-DELETE FROM G3 WHERE Gno = OLD.Gno;
-DELETE FROM DES WHERE Gno = OLD.Gno;
-DELETE FROM BRO WHERE Gno = OLD.Gno;
-DELETE FROM CHA WHERE Gnoplan = OLD.Gno OR Gnoadopt = OLD.Gno;
+DELETE FROM Goods_2 WHERE Gno = OLD.Gno;
+DELETE FROM Goods_3 WHERE Gno = OLD.Gno;
+DELETE FROM Describle WHERE Gno = OLD.Gno;
+DELETE FROM Search WHERE Gno = OLD.Gno;
+DELETE FROM Charge WHERE Gnoplan = OLD.Gno OR Gnoadopt = OLD.Gno;
 END";
 
 if ($conn -> query ($sql) === TRUE) 
-    echo "TRIGGER TR5 created successfully" . '<br>';
+    echo "TRIGGER TR_delete_goods created successfully" . '<br>';
 else 
-    echo "创建触发器 TR5 错误: " . $conn -> error . '<br>';
+    echo "创建触发器 TR_delete_goods  错误: " . $conn -> error . '<br>';
 
-//G2表触发器
-$sql = "CREATE TRIGGER TR6 AFTER UPDATE ON G2 FOR EACH ROW
+//Goods_2表触发器
+$sql = "CREATE TRIGGER TR_goods_check AFTER UPDATE ON Goods_2 FOR EACH ROW
 BEGIN
 IF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = $str_5 THEN
-	UPDATE G1 SET Gstate = $str_2 WHERE Gno = NEW.Gno;
+	UPDATE Goods_1 SET Gstate = $str_2 WHERE Gno = NEW.Gno;
 ELSEIF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = $str_4 THEN
-	UPDATE G1 SET Gstate = $str_1 WHERE Gno = NEW.Gno;
+	UPDATE Goods_1 SET Gstate = $str_1 WHERE Gno = NEW.Gno;
 END IF;
 END";
 
 if ($conn -> query ($sql) === TRUE) 
-    echo "TRIGGER TR6 created successfully" . '<br>';
+    echo "TRIGGER TR_goods_check created successfully" . '<br>';
 else 
-    echo "创建触发器 TR6 错误: " . $conn -> error . '<br>';
+    echo "创建触发器 TR_goods_check 错误: " . $conn -> error . '<br>';
 
-//G3表触发器
-$sql = "CREATE TRIGGER TR7 AFTER UPDATE ON G3 FOR EACH ROW
+//Good_3表触发器
+$sql = "CREATE TRIGGER TR_edit_goods AFTER UPDATE ON Goods_3 FOR EACH ROW
 BEGIN
 IF NEW.Ginstruction != OLD.Ginstruction OR NEW.Gparameter != OLD.Gparameter OR NEW.Gtime != OLD.Gtime OR NEW.Gprice != old.Gprice THEN
-	UPDATE G2 SET Gcheck = $str_4, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
+	UPDATE Goods_2 SET Gcheck = $str_4, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
 END IF;
 END";
 
 if ($conn -> query ($sql) === TRUE) 
-    echo "TRIGGER TR7 created successfully" . '<br>';
+    echo "TRIGGER TR_edit_goods  created successfully" . '<br>';
 else 
-    echo "创建触发器 TR7 错误: " . $conn -> error . '<br>';
+    echo "创建触发器 TR_edit_goods  错误: " . $conn -> error . '<br>';
 
-//T表触发器
-$sql = "CREATE TRIGGER TR8 AFTER DELETE ON T FOR EACH ROW
+//Tag表触发器
+$sql = "CREATE TRIGGER TR_delete_tag AFTER DELETE ON Tag FOR EACH ROW
 BEGIN
-DELETE FROM DES WHERE Tno = OLD.Tno;
+DELETE FROM Describle WHERE Tno = OLD.Tno;
 END";
 
 if ($conn -> query ($sql) === TRUE) 
-    echo "TRIGGER TR8 created successfully" . '<br>';
+    echo "TRIGGER TR_delete_tag created successfully" . '<br>';
 else 
-    echo "创建触发器 TR8 错误: " . $conn -> error . '<br>';
+    echo "创建触发器 TR_delete_tag 错误: " . $conn -> error . '<br>';
 
-//M表触发器
-$sql = "CREATE TRIGGER TR9 AFTER DELETE ON M FOR EACH ROW
+//Message表触发器
+$sql = "CREATE TRIGGER TR_delete_message AFTER DELETE ON Message FOR EACH ROW
 BEGIN 
-DELETE FROM NTI WHERE Mno = OLD.Mno;
+DELETE FROM Notify WHERE Mno = OLD.Mno;
 END";
 
 if ($conn -> query ($sql) === TRUE) 
-    echo "TRIGGER TR9 created successfully" . '<br>';
+    echo "TRIGGER TR_delete_message created successfully" . '<br>';
 else 
-    echo "创建触发器 TR9 错误: " . $conn -> error . '<br>';
+    echo "创建触发器 TR_delete_message 错误: " . $conn -> error . '<br>';
 
-//DES表触发器
-$sql = "CREATE TRIGGER TR10 AFTER INSERT ON DES FOR EACH ROW
+//Describle表触发器
+$sql = "CREATE TRIGGER TR_edit_tag AFTER INSERT ON Describle FOR EACH ROW
 BEGIN
-UPDATE G2 SET Gcheck = $str_4, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
+UPDATE Good_2 SET Gcheck = $str_4, Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
 END";
 
 if ($conn -> query($sql) === TRUE) 
-    echo "TRIGGER TR10 created successfully" . '<br>';
+    echo "TRIGGER TR_edit_tag created successfully" . '<br>';
 else 
-    echo "创建触发器 TR10 错误: " . $conn -> error . '<br>';
+    echo "创建触发器 TR_edit_tag 错误: " . $conn -> error . '<br>';
 
-//CHA表触发器
-$sql = "CREATE TRIGGER TR11 AFTER INSERT ON CHA FOR EACH ROW
+//Charge表触发器
+$sql = "CREATE TRIGGER TR_apply_charge AFTER INSERT ON Charge FOR EACH ROW
 BEGIN
-UPDATE G1 SET Gstate = $str_3 WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
+UPDATE Goods_1 SET Gstate = $str_3 WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
 END";
 
 if ($conn->query($sql) === TRUE) 
-    echo "TRIGGER TR11 created successfully" . '<br>';
+    echo "TRIGGER TR_apply_charge created successfully" . '<br>';
 else 
-    echo "创建触发器 TR11 错误: " . $conn -> error . '<br>';
+    echo "创建触发器 TR_apply_charge 错误: " . $conn -> error . '<br>';
 
-$sql = "CREATE TRIGGER TR12 AFTER UPDATE ON CHA FOR EACH ROW
+$sql = "CREATE TRIGGER TR_charge_state AFTER UPDATE ON Charge FOR EACH ROW
 BEGIN
 IF NEW.CHAplanstate = $str_8 AND NEW.CHAadoptstate = $str_8 THEN
-	UPDATE U2 SET Ucredit = Ucredit + NEW.CHAadoptcredit WHERE Uname IN (SELECT Uname FROM G1 WHERE Gno = NEW.Gnoplan);
-	UPDATE U2 SET Ucredit = Ucredit + NEW.CHAplancredit WHERE Uname IN (SELECT Uname FROM G1 WHERE Gno = NEW.Gnoadopt);
-	DELETE FROM G1 WHERE Gno = Gnoplan OR Gno = Gnoadopt;
+	UPDATE User_2 SET Ucredit = Ucredit + NEW.CHAadoptcredit WHERE Uname IN (SELECT Uname FROM G1 WHERE Gno = NEW.Gnoplan);
+	UPDATE User_2 SET Ucredit = Ucredit + NEW.CHAplancredit WHERE Uname IN (SELECT Uname FROM G1 WHERE Gno = NEW.Gnoadopt);
+	DELETE FROM Goods_1 WHERE Gno = Gnoplan OR Gno = Gnoadopt;
 END IF;
 IF NEW.CHAplanstate = $str_9 AND NEW.CHAadoptstate = $str_9 THEN
-	UPDATE G1 SET Gstate = $str_2 WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
+	UPDATE Goods_1 SET Gstate = $str_2 WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
 END IF;
 END";
 
 if ($conn -> query ($sql) === TRUE)
-    echo "TRIGGER TR12 created successfully" . '<br>';
+    echo "TRIGGER TR_charge_state created successfully" . '<br>';
 else
-    echo "创建触发器 TR12 错误: " . $conn -> error . '<br>';
+    echo "创建触发器 TR_charge_state 错误: " . $conn -> error . '<br>';
 
-//NTI表触发器
-$sql = "CREATE TRIGGER TR13 AFTER DELETE ON NTI FOR EACH ROW
+//Notify表触发器
+$sql = "CREATE TRIGGER TR_delete_notification AFTER DELETE ON Notify FOR EACH ROW
 BEGIN 
-DELETE FROM M WHERE Mno = OLD.Mno;
+DELETE FROM Message WHERE Mno = OLD.Mno;
 END";
 
 if ($conn -> query ($sql) === TRUE) 
-    echo "TRIGGER TR13 created successfully" . '<br>';
+    echo "TRIGGER TR_delete_notification created successfully" . '<br>';
 else 
-    echo "创建触发器 TR13 错误: " . $conn -> error . '<br>';
+    echo "创建触发器 TR_delete_notification 错误: " . $conn -> error . '<br>';
 
 $conn->close();
 

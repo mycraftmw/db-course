@@ -12,7 +12,7 @@ if ($conn -> connect_error) {
 }
 $gno = $_POST ["gno"];
 $sql = "SELECT Gnoplan, Gnoadopt, CHAmoney, CHAplanstate, CHAplancredit, CHAadoptstate, CHAadoptcredit, CHAtimestamp
-		FROM CHA 
+		FROM Charge 
 		WHERE 
 		Gnoplan = $gno OR 
 		Gnoadopt = $gno

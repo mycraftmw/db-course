@@ -11,11 +11,12 @@ if ($conn -> connect_error) {
 	exit;
 }
 $gno = $_POST ["gno"];
-$sql = "SELECT G1.Gno, Gname, Uname, Gtype, Gaddress, Ginstruction, Gparameter, Gtime, Gprice 
-		FROM G1, G3
+echo $gno;
+$sql = "SELECT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Ginstruction, Gparameter, Gtime, Gprice 
+		FROM Goods_1, Goods_3
 		WHERE
-		G1.Gno = G3.Gno AND
-		G1.Gno = $gno;";
+		Goods_1.Gno = Goods_3.Gno AND
+		Goods_1.Gno = $gno;";
 $result = $conn -> query ($sql);
 if ($result) {
 	$row = $result -> fetch_assoc();
@@ -41,11 +42,10 @@ if ($result) {
 		exit;
 	}
 	else {
-	$conn -> close ();
-	$json = array ("status" => "n");	
+	$conn -> close ();	
 	echo json_encode ($json);
 	exit;
-}
+	}
 }
 else {
 	$conn -> close ();
