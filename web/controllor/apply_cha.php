@@ -13,9 +13,9 @@ if ($conn -> connect_error) {
 $gnoplan = $_POST ["gnoplan"];
 $gnoadopt = $_POST ["gnoadopt"];
 $chamoney = $_POST ["chamoney"];
-$CHAplanstate = "\"等待交易\"";
-$CHAadoptstate = "\"等待交易\"";
-$sql = "INSERT INTO CHA VALUES ($gnoplan, $gnoadopt, $chamoney, $CHAplanstate, 0, $CHAadoptstate, 0, CURRENT_TIMESTAMP);";
+$chaplanstate = "\"等待交易\"";
+$chaadoptstate = "\"等待交易\"";
+$sql = "INSERT INTO CHA VALUES ($gnoplan, $gnoadopt, $chamoney, $chaplanstate, 0, $chaadoptstate, 0, CURRENT_TIMESTAMP);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
 	$json = array ("status" => "n");
