@@ -26,7 +26,8 @@ if (!$result) {
 	echo json_encode ($json);
 	exit;
 }
-$upassword = "\"\"";	
+$uaddress = "\"\"";
+$upassword = "\"" . $_POST ["upassword"] . "\"";		
 $uphone = "\"" . $_POST ["uphone"] . "\"";	
 $uemail = "\"" . $_POST ["uemail"] . "\"";
 $conn -> query ("BEGIN;");
