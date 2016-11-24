@@ -11,14 +11,15 @@ if ($conn -> connect_error) {
 	exit;
 }
 $uname = "\"" . $_POST ["uname"] . "\"";	
-$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
-		FROM Goods_1, Goods_2
+$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp, Ginstruction, Gparameter, Gtime, Gprice
+		FROM Goods_1, Goods_2, Goods_3
 		WHERE
-		Goods_1.Gno = Goods_2.Gno AND 
+		Goods_1.Gno = Goods_2.Gno AND
+		Goods_1.Gno = Goods_3.Gno AND		
 		Uname = $uname
 		ORDER BY Gtimestamp DESC;";		
 $result = $conn -> query ($sql);
-if ($result) {
+if ($result && mysqli_num_rows ($result)) {
 	$json = array ("status" => "y");
 	$i = 0;
 	while ($row = $result -> fetch_assoc()) {
@@ -31,6 +32,10 @@ if ($result) {
 		$jsonn ["gstate"] = $row ["Gstate"];
 		$jsonn ["gcheck"] = $row ["Gcheck"];
 		$jsonn ["gtimestamp"] = $row ["Gtimestamp"];
+		$jsonn ["ginstruction"] = $row ["Ginstruction"];
+		$jsonn ["gparameter"] = $row ["Gparameter"];
+		$jsonn ["gtime"] = $row ["Gtime"];
+		$jsonn ["gprice"] = $row ["Gprice"];
 		$json [++$i] = $jsonn;
 	}
 	$conn -> close ();			

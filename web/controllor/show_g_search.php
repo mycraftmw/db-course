@@ -17,10 +17,11 @@ $str = "\"市场中\"";
 $result;
 switch ($opr) {
 	case 0:
-		$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
+		$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp, Ginstruction, Gparameter, Gtime, Gprice
 				FROM Goods_1, Goods_2, Describle, Tag
 				WHERE
 				Goods_1.Gno = Goods_2.Gno AND
+				Goods_1.Gno = Goods_3.Gno AND	
 				Gstate = $str AND 
 				Uname != $uname AND
 				(Gname = $words OR Gtype = $words OR
@@ -31,10 +32,11 @@ switch ($opr) {
 		$result = $conn -> query ($sql);
 		break;
 	case 1:
-		$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
+		$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp, Ginstruction, Gparameter, Gtime, Gprice
 				FROM Goods_1, Goods_2, Describle, Tag, User_2
 				WHERE
 				Goods_1.Gno = Goods_2.Gno AND
+				Goods_1.Gno = Goods_3.Gno AND	
 				Goods_1.Uname = User_2.Uname AND
 				Gstate = $str AND 
 				Uname != $uname AND
@@ -46,7 +48,7 @@ switch ($opr) {
 		$result = $conn -> query ($sql);
 		break;
 	case 2:
-		$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
+		$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp, Ginstruction, Gparameter, Gtime, Gprice
 				FROM Goods_1, Goods_2, Describle, Tag, Goods_3
 				WHERE
 				Goods_1.Gno = Goods_2.Gno AND
@@ -61,7 +63,7 @@ switch ($opr) {
 		$result = $conn -> query ($sql);
 		break;
 	case 3:
-		$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
+		$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp, Ginstruction, Gparameter, Gtime, Gprice
 				FROM Goods_1, Goods_2, Describle, Tag, Goods_3
 				WHERE
 				Goods_1.Gno = Goods_2.Gno AND
@@ -76,7 +78,7 @@ switch ($opr) {
 		$result = $conn -> query ($sql);
 		break;
 	default :
-		$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
+		$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp, Ginstruction, Gparameter, Gtime, Gprice
 				FROM Goods_1, Goods_2, Describle, Tag, Goods_3
 				WHERE
 				Goods_1.Gno = Goods_2.Gno AND
@@ -91,7 +93,7 @@ switch ($opr) {
 		$result = $conn -> query ($sql);
 		break;
 }
-if ($result) {
+if ($result && mysqli_num_rows ($result)) {
 	$json = array ("status" => "y");
 	$i = 0;
 	while ($row = $result -> fetch_assoc()) {
@@ -104,6 +106,10 @@ if ($result) {
 		$jsonn ["gstate"] = $row ["Gstate"];
 		$jsonn ["gcheck"] = $row ["Gcheck"];
 		$jsonn ["gtimestamp"] = $row ["Gtimestamp"];
+		$jsonn ["ginstruction"] = $row ["Ginstruction"];
+		$jsonn ["gparameter"] = $row ["Gparameter"];
+		$jsonn ["gtime"] = $row ["Gtime"];
+		$jsonn ["gprice"] = $row ["Gprice"];
 		$json [++$i] = $jsonn;
 	}
 	$conn -> close ();			

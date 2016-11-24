@@ -19,7 +19,7 @@ $sql = "SELECT *
 		Uroot = $uroot AND
 		Rcontent = $rcontent;";
 $result = $conn -> query ($sql);
-if ($result) {
+if ($result && mysqli_num_rows ($result)) {
 	$json = array ("status" => "y");
 	$conn -> close ();
 	echo json_encode ($json);

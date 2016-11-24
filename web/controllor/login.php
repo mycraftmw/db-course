@@ -20,7 +20,7 @@ $sql = "SELECT User_1.Uname, Sno, Uroot, Usexy, Ucredit, Uaddress, Upassword, Up
 		User_1.Uname = $uname AND 
 		Upassword = $upassword;";
 $result = $conn -> query ($sql);
-if ($result) {
+if ($result && mysqli_num_rows ($result)) {
 	$row = $result -> fetch_assoc ();
 	if(!$row['Uname']||!$row ["Sno"]){
 		$json = array ("status" => "n");

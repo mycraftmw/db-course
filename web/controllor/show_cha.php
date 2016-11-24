@@ -19,7 +19,7 @@ $sql = "SELECT Gnoplan, Gnoadopt, CHAmoney, CHAplanstate, CHAplancredit, CHAadop
 		ORDER BY 
 		CHAtimestamp DESC";
 $result = $conn -> query ($sql);
-if ($result) {
+if ($result && mysqli_num_rows ($result)) {
 	$row = $result -> fetch_assoc();
 	$json = array ("status" => "y");
 	if ($row ["Gnoplan"] == $gno) {

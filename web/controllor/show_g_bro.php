@@ -12,16 +12,17 @@ if ($conn -> connect_error) {
 }
 $uname = "\"" . $_POST ["uname"] . "\"";	
 $str = "\"市场中\"";
-$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp
+$sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp, Ginstruction, Gparameter, Gtime, Gprice
 		FROM Goods_1, Goods_2
 		WHERE
 		Goods_1.Gno = Goods_2.Gno AND 
+		Goods_1.Gno = Goods_3.Gno AND	
 		Gstate = $str AND
 		Uname != $uname AND
 		Goods_1.Gno IN (SELECT Gno FROM Search WHERE Uname = $uname ORDER BY BROtimestamp DESC)
 		ORDER BY Gtimestamp DESC;";		
 $result = $conn -> query ($sql);
-if ($result) {
+if ($result && mysqli_num_rows ($result)) {
 	$json = array ("status" => "y");
 	$i = 0;
 	while ($row = $result -> fetch_assoc()) {
@@ -34,6 +35,10 @@ if ($result) {
 		$jsonn ["gstate"] = $row ["Gstate"];
 		$jsonn ["gcheck"] = $row ["Gcheck"];
 		$jsonn ["gtimestamp"] = $row ["Gtimestamp"];
+		$jsonn ["ginstruction"] = $row ["Ginstruction"];
+		$jsonn ["gparameter"] = $row ["Gparameter"];
+		$jsonn ["gtime"] = $row ["Gtime"];
+		$jsonn ["gprice"] = $row ["Gprice"];
 		$json [++$i] = $jsonn;
 	}
 	$conn -> close ();			

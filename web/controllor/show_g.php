@@ -18,7 +18,7 @@ $sql = "SELECT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Ginstruction, Gparame
 		Goods_1.Gno = Goods_3.Gno AND
 		Goods_1.Gno = $gno;";
 $result = $conn -> query ($sql);
-if ($result) {
+if ($result && mysqli_num_rows ($result)) {
 	$row = $result -> fetch_assoc();
 	$json = array ("status" => "y");
 	$json ["gno"] = $row ["Gno"];
@@ -33,7 +33,7 @@ if ($result) {
 	$sql = "SELECT Tno FROM DES WHERE Gno = $gno;";
 	$result = $conn -> query ($sql);
 	$tno = "";
-	if ($result) {
+	if ($result && mysqli_num_rows ($result)) {
 		while ($row = $result -> fetch_assoc()) 
 			$tno = $row ["Tno"] . " ";
 		$json ["tno"] = $tno;

@@ -15,7 +15,7 @@ $sql = "SELECT User_1.Uname, Uroot, Usexy, Ucredit, Uaddress
 		WHERE 
 		User_1.Uname = User_2.Uname;";
 $result = $conn -> query ($sql);
-if ($result) {
+if ($result && mysqli_num_rows ($result)) {
 	$json = array ("status" => "y");
 	$i = 0;
 	while ($row = $result -> fetch_assoc()) {
