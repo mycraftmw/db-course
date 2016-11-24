@@ -105,10 +105,10 @@
         <ul id="nav" class="nav navbar-nav">
           <li><a href="index">首页</a></li>
           <li><a href="market">市场</a></li>
-          <li><a id="outlg" data-toggle="modal" data-target="#login" href="#services">登录</a></li>
-          <li><a id="outrg" href="user">注册</a></li>
           <li><a id="inmsg" href="message">消息</a></li>
-          <li><a id="inname" href="user">guo</a></li>          
+          <li><a id="outlg" data-toggle="modal" data-target="#login" href="javasript:void(0);">登录</a></li>
+          <li><a id="outrg" href="register">注册</a></li>
+          <li><a id="inname" href="user"></a></li>          
         </ul>
       </nav>
       <!-- /main nav -->
@@ -131,11 +131,11 @@
         <div class="modal-body">
           <p>
             <label class="black">用户名：</label>
-            <input id="lusername" class="black" type="text" name="username" placeholder="username" />
+            <input id="lusername" type="text" name="username" placeholder="username" style='color:black;'/>
           </p>
           <p>
             <label class="black">密&emsp;码：</label>
-            <input id="luserpw" type="password" name="password" placeholder="password" />
+            <input id="luserpw" type="password" name="password" placeholder="password" style='color:black;'/>
           </p>
         </div>
         <div class="modal-footer">
@@ -260,7 +260,7 @@
 
               <!-- features content -->
               <div class="col-md-6 feature-desc wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
-                <h3>欢乐交友</h3>
+                <h3>交换友谊</h3>
                 <p>两千年前耶稣诞生时，从遥远的东方来了三位星象学家（东方三博士），他们发现一个奇特的星象，根据时间往回推，可能是哈雷慧星。 于是他们跟着这个奇异星星的引导，来到了伯利恒，因此后来的圣诞树顶部会有星星的装饰。 他们把三个礼物，黄金、乳香、没药（一种中药材），献给了耶稣。
                   后来就慢慢演变成交换礼物了。
                 </p>

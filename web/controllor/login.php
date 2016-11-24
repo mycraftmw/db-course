@@ -22,7 +22,14 @@ $sql = "SELECT User_1.Uname, Sno, Uroot, Usexy, Ucredit, Uaddress, Upassword, Up
 $result = $conn -> query ($sql);
 if ($result) {
 	$row = $result -> fetch_assoc ();
-	$json = array ("status" => "y");
+	if(!$row['Uname']||!$row ["Sno"]){
+		$json = array ("status" => "n");
+		$conn -> close ();
+		echo json_encode ($json);
+		exit;
+	}
+	else 
+		$json = array ("status" => "y");
 	$json ["uname"] = $row ["Uname"];
 	$json ["sno"] = $row ["Sno"];
 	$json ["uroot"] = $row ["Uroot"];
@@ -32,6 +39,7 @@ if ($result) {
 	$json ["upassword"] = $row ["Upassword"];
 	$json ["uphone"] = $row ["Uphone"];
 	$json ["uemail"] = $row ["Uemail"];
+	
 	$conn -> close ();
 	echo json_encode ($json);
 	exit;

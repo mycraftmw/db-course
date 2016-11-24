@@ -121,63 +121,26 @@
 
 
   <div class="container">
-    <div class="row">
-      <h1 class="">个人信息</h1>
+    <div class="row text-center">
+      <h1 class="">填写注册信息</h1>
       <hr>
     </div>
     <div class="row">
-      <div class="container col-xs-4">
-        <img id='avator' src="img/item/guo.jpg" width="300px" >
-        <br>
-        <input id='upavator' type="file">
-        <button type="button" class="btn btn-xs btn-success" onclick="uploadavator();">上传头像</button>
-      </div>
-      <div class="container col-xs-8">
+      <div class="container">
         <div class="row text-center">
-          <div class="col-xs-3">
-            <h4>用户名：</h4>
-            <h4>学号：</h4>
-            <h4>性别：</h4>
-            <h4>信誉度：</h4>
-            <h4>电话：</h4>
-            <h4>邮箱：</h4>
-            <h4>用户类型：</h4>
-            <h4>旧密码：</h4>
-            <h4>新密码：</h4>
-            <h4>确认新密码：</h4>
-          </div>
-          <div id="ui" class="col-xs-3">
-            <h4 id="uiname">guo</h4>
-            <h4 id="uisno">14064041</h4>
-            <h4 id="uisex">男</h4>
-            <h4 id="uicredit">不错</h4>
-            <h4 id="uiphone">13000000000</h4>
-            <h4 id="uiemail">daguo@buaa.edu.cn</h4>
-            <h4 id="uiper">管理员</h4>            
-            <input id="uiopw" class="black" type="password" name="old">
-            <input id="uinpw" class="black" type="password" name="new">
-            <input id="uicnpw" class="black" type="password" name="cnew">
-          </div>
+          <input id='username' type="text" placeholder="用户名(由字母或下划线组成)" style='color:black;' ><br>
+          <input id='password' type="password" placeholder="输入密码" style='color:black;'><br>
+          <select name="select" id="select_sex" style="width: 50px;color: black;">
+            <option value="男">男</option>
+            <option value="女">女</option>
+          </select><br>
+          <input id='sno' type="number" placeholder='学号' style='color:black;' ><br>
+          <input id='uemail' type="email" placeholder='邮箱' style='color:black;'><br>
+          <input id='uphone' type="tel" placeholder='手机号' style='color:black;'><br>
+          <button type="button" class="btn btn-warning" onclick="register();" >注册</button>
         </div>
-        <div class="row text-center">
-          <div class="col-xs-6">
-            <button type="button" class="btn btn-warning" onclick="changepw();" >修改密码</button>
-            <button type="button" class="btn btn-danger " onclick="logout();" >注销</button>            
-          </div>
-        </div>
-        
       </div>
     </div>
-    <div class="row">
-        <h2>我的物品</h2>
-        <hr>
-        <a class="btn btn-danger" data-toggle="modal" data-target="#uploadmodal" >上传物品</a>
-        <br>
-        <br>
-        <ul id='itemlist'>
-          
-        </ul>
-      </div>
   </div>
 
   <!-- end Contact Area
@@ -187,7 +150,6 @@
     <div class="container">
       <div class="row wow fadeInUp" data-wow-duration="500ms">
         <div class="col-lg-12">
-
 
           <!-- copyright -->
           <div class="copyright text-center">
@@ -244,32 +206,6 @@
       </div>
     </div>
   </div>
-
-    <!-- 模态框（Modal） -->
-  <div id="uploadmodal" class="modal fade">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <a class="close" data-dismiss="modal">×</a>
-          <h3 class="black">上传</h3>
-        </div>
-        <div class="modal-body">
-          <p>
-            <label class="black">图片</label>
-            <input id='upitemimg' class='black' type="file">
-          </p>
-          <p>
-            <label class="black">描述</label>
-            <input id='upitemdes' class='black' type="text" placeholder='输入物品描述'>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <a href="#" class="btn btn-success black" onclick="uploadItem();">上传</a>
-          <a href="#" class="btn black " data-dismiss="modal">关闭</a>
-        </div>
-      </div>
-    </div>
-  </div>
   <!-- 
         Essential Scripts
         =====================================-->
@@ -318,7 +254,6 @@
   <script>
     $(function ($){
       modifybar();
-      fillinfo();
     });
   </script>
 </body>

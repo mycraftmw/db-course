@@ -1,22 +1,30 @@
 function modifybar() {
-    document.getElementById("inname").style.display = "";
-    document.getElementById("inmsg").style.display = "";
-    document.getElementById("outlg").style.display = "none";
-    document.getElementById("outrg").style.display = "none";
-
-
-    // var data = eval('(' + document.cookie + ')');
-    // if (data.status == 'y') {
-    //     document.getElementById("outlg").style.display = "none";
-    //     document.getElementById("outrg").style.display = "none";
-    //     document.getElementById("inname").innerText = data.name;
-    //     document.getElementById("inname").style.display = "";
-    // } else {
-    //     document.getElementById("inname").style.display = "none";
-    //     document.getElementById("outlg").style.display = "";
-    //     document.getElementById("outrg").style.display = "";
-    // }
-    // return;
+    if (document.cookie == '') {
+        document.getElementById("inname").style.display = "none";
+        document.getElementById('inmsg').style.display = 'none';
+        document.getElementById("outlg").style.display = "";
+        document.getElementById("outrg").style.display = "";
+        if (window.location.href == 'http://localhost/db/user' ||
+            window.location.href == 'http://localhost/db/message') {
+            alert('您还没登录呢！');
+            location.replace('index');
+        }
+    } else {
+        var data = eval('(' + document.cookie + ')');
+        if (data.status == 'y') {
+            document.getElementById("outlg").style.display = "none";
+            document.getElementById("outrg").style.display = "none";
+            document.getElementById("inname").innerText = data.uname;
+            document.getElementById("inname").style.display = "";
+            document.getElementById('inmsg').style.display = '';
+        } else {
+            alert(1);
+            document.getElementById("inname").style.display = "none";
+            document.getElementById('inmsg').style.display = 'none';
+            document.getElementById("outlg").style.display = "";
+            document.getElementById("outrg").style.display = "";
+        }
+    }
 }
 
 function register() {
@@ -24,38 +32,45 @@ function register() {
         type: 'POST',
         url: 'controllor/register',
         data: {
-            uname: "daxin",
-            sno: "00000001",
-            spassword: "00000001",
-            upassword: "00000001",
-            usexy: '1',
-            uphone: "12312341234",
-            uemail: "daxin@buaa.edu.cn"
+            uname: document.getElementById('username').value,
+            sno: document.getElementById('sno').value,
+            spassword: document.getElementById('password').value,
+            upassword: document.getElementById('password').value,
+            usexy: document.getElementById('select_sex').value,
+            uphone: document.getElementById('uphone').value,
+            uemail: document.getElementById('uemail').value
         },
         success: function (data) {
-            alert(data);
             var res = eval('(' + data + ')');
+            if (res.status == 'y') {
+                alert("注册成功！");
+                location.replace('index');
+                return;
+            } else {
+                alert("注册失败！");
+                return;
+            }
         }
     });
-    return;
 }
 
 function fillinfo() {
     if (document.cookie == '') {
         return;
     }
-    document.getElementById('avator').src = document.cookie;
-    // var data = eval('(' + document.cookie + ')');
-    // document.getElementById('uiname').innerText = data.uname;
-    // document.getElementById('uisno').innerText = data.sno;
-    // document.getElementById('uisex').innerText = data.usexy;
-    // document.getElementById('uicredit').innerText = data.ucredit;
-    // document.getElementById('uiphone').innerText = data.uphone;
-    // document.getElementById('uiemail').innerText = data.uemail;
+    var data = eval('(' + document.cookie + ')');
+    document.getElementById('uiname').innerText = data.uname;
+    document.getElementById('uisno').innerText = data.sno;
+    document.getElementById('uisex').innerText = data.usexy;
+    document.getElementById('uicredit').innerText = data.ucredit;
+    document.getElementById('uiphone').innerText = data.uphone;
+    document.getElementById('uiemail').innerText = data.uemail;
+    document.getElementById('avator').src = data.uaddress;
     return;
 }
 
 function login() {
+    document.cookie = '';
     $.ajax({
         type: 'POST',
         url: 'controllor/login',
@@ -64,27 +79,36 @@ function login() {
             upassword: document.getElementById('luserpw').value
         },
         success: function (data) {
-            alert(data);
             var res = eval('(' + data + ')');
             if (res.status != 'y') {
                 alert('登录失败！');
+                return;
             } else {
                 alert('登录成功！');
                 document.cookie = data;
                 modifybar();
-                location.reload();
+                location.replace('index');
+                return;
             }
         }
     });
-    return;
+}
+
+function logout() {
+    var r = confirm("确定要退出么？");
+    if (r == true) {
+        document.cookie = '';
+        location.replace('index');
+        alert("注销成功");
+    }
 }
 
 function changepw() {
-    var data = eval('(' + document.cookie + ')');
+    var olddata = eval('(' + document.cookie + ')');
     var uiom = document.getElementById('uiopw').value;
     var uinm = document.getElementById('uinpw').value;
     var uicnm = document.getElementById('uicnpw').value;
-    if (data.password != uiom) {
+    if (olddata.upassword != uiom) {
         alert("旧密码错误！");
         return;
     }
@@ -94,17 +118,27 @@ function changepw() {
     }
     $.ajax({
         type: 'POST',
-        url: 'controllor/edit_a_inf',
+        url: 'controllor/edit_u_inf',
         data: {
-            username: data.name,
-            phone: data.phone,
-            email: data.email
+            uname: olddata.uname,
+            uphone: olddata.uphone,
+            uemail: olddata.uemail,
+            upassword: uicnm
         },
-        success: function (data) {
-            alert(data);
+        success: function (reval) {
+            var res = eval('(' + reval + ')');
+            if (res.status == 'y') {
+                alert('修改成功');
+                olddata.upassword = uicnm;
+                document.cookie = JSON.stringify(olddata);
+                location.reload();
+                return;
+            } else {
+                alert('修改失败');
+                return;
+            }
         }
     });
-    return;
 }
 
 function search() {
@@ -115,37 +149,40 @@ function search() {
         url: 'test',
         data: sd,
         success: function (data) {
-
+            var res = eval('(' + reval + ')');
         }
     });
     return;
 }
 
 function fillMarket() {
-    var k = [];
-    var itemTitle = 'WOW';
-    var itemDescription = "32";
-    var itemLabel = 'taga';
-    var imgUrl = 'img/item/images.jpg';
-    var itemOwner = 'javascript:void(0)';
+    
     $.ajax({
         type: 'POST',
         url: 'controllor/show_g_list',
         success: function (data) {
-            // alert(data);
-            // var obj = eval('(' + data + ')');
-            // for (var key in obj) {
-            //     alert(key + ' ' + obj[key]);
-            // }
+            alert(data);
+            var res = eval('(' + data + ')');
+            var k = [];
+            for (var key in res) {
+                if (key != 'status' && res.hasOwnProperty(key)) {
+                    var element = res[key];
+                    var itemTitle = element.gname;
+                    var itemDescription = "23";
+                    var itemLabel = element.gtype;
+                    var imgUrl = element.gaddress;
+                    
+                    k.push(buildItem(itemTitle, itemDescription, itemLabel, imgUrl));
+                }
+            }
+            Grid.addItems(k);
         }
     });
-    k.push(buildItem(itemTitle, itemDescription, itemLabel, imgUrl, itemOwner));
-    k.push(buildItem(itemTitle, itemDescription, itemLabel, imgUrl, itemOwner));
-    Grid.addItems(k);
+    
     return;
 }
 
-function buildItem(title, description, label, imgUrl, owner) {
+function buildItem(title, description, label, imgUrl) {
     var kuang = document.getElementById('og-grid');
     var li = document.createElement('li');
     var a = document.createElement('a');
@@ -156,11 +193,11 @@ function buildItem(title, description, label, imgUrl, owner) {
     li.className = 'mix ' + label;
     li.setAttribute('style', 'display: inline-block;');
     li.appendChild(a);
-    a.setAttribute('href', owner);
+    a.setAttribute('href', "javascipt:;");
     a.setAttribute('data-largesrc', imgUrl);
     a.setAttribute('data-title', title);
     a.setAttribute('data-description', description);
-    a.innerHTML = "<img src='" + imgUrl + "' width='100%'><div class ='hover-mask'><h3>" + title + "</h3><span><i class='fa fa-apple fa- 2x'></i></span></div>";
+    a.innerHTML = "<img src='" + imgUrl + "' width='100%'><div class ='hover-mask'><h3>" + title + "</h3><span><i class='fa fa-plus fa- 2x'></i></span></div>";
     kuang.appendChild(li);
     return li;
 }
@@ -178,6 +215,6 @@ function uploadavator() {
     pa = pa.split('\\');
     pa = pa[pa.length - 1];
     document.cookie = 'img/' + pa;
-    document.getElementById('avator').src = 'img/' + pa; 
+    document.getElementById('avator').src = 'img/' + pa;
     return;
 }

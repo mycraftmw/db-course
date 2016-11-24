@@ -105,10 +105,10 @@
         <ul id="nav" class="nav navbar-nav">
           <li><a href="index">首页</a></li>
           <li><a href="market">市场</a></li>
-          <li><a id="outlg" data-toggle="modal" data-target="#login" href="#services">登录</a></li>
-          <li><a id="outrg" href="user">注册</a></li>
           <li><a id="inmsg" href="message">消息</a></li>
-          <li><a id="inname" href="user">guo</a></li>          
+          <li><a id="outlg" data-toggle="modal" data-target="#login" href="javasript:void(0);">登录</a></li>
+          <li><a id="outrg" href="register">注册</a></li>
+          <li><a id="inname" href="user"></a></li>          
         </ul>
       </nav>
       <!-- /main nav -->
@@ -129,11 +129,11 @@
         <div class="modal-body">
           <p>
             <label class="black">用户名：</label>
-            <input id="lusername" class="black" type="text" name="username" placeholder="username" />
+            <input id="lusername" type="text" name="username" placeholder="username" style='color:black;'/>
           </p>
           <p>
             <label class="black">密&emsp;码：</label>
-            <input id="luserpw" type="password" name="password" placeholder="password" />
+            <input id="luserpw" type="password" name="password" placeholder="password" style='color:black;'/>
           </p>
         </div>
         <div class="modal-footer">
@@ -143,6 +143,8 @@
       </div>
     </div>
   </div>
+
+
   <div class="container">
     <h1>消息列表</h1>
     <hr>

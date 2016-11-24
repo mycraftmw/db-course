@@ -13,7 +13,7 @@ if ($conn -> connect_error) {
 $sno = "\"" . $_POST ["sno"] . "\"";	
 $spassword = "\"" . $_POST ["spassword"] . "\"";	
 $uname = "\"" . $_POST ["uname"] . "\"";	
-$uroot = "\"用户\"";
+$uroot = "\"普通用户\"";
 $usexy = "\"" . $_POST ["usexy"] . "\"";
 $sql = "SELECT * 
 		FROM Student 
@@ -26,7 +26,7 @@ if (!$result) {
 	echo json_encode ($json);
 	exit;
 }
-$uaddress = "\"\"";
+$uaddress = "\"img/defaultavator.jpg\"";
 $upassword = "\"" . $_POST ["upassword"] . "\"";		
 $uphone = "\"" . $_POST ["uphone"] . "\"";	
 $uemail = "\"" . $_POST ["uemail"] . "\"";
