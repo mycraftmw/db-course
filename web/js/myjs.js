@@ -361,10 +361,19 @@ function uploadItem() {
 }
 
 function uploadavator() {
-    var pa = document.getElementById('upavator').value;
-    pa = pa.split('\\');
-    pa = pa[pa.length - 1];
-    document.cookie = 'img/' + pa;
-    document.getElementById('avator').src = 'img/' + pa;
-    return;
+    var udata = eval('(' + document.cookie + ')');
+    var formData = new FormData();
+    formData.append('image', $('#upavator')[0].files[0]);
+    formData.append('uname', udata.uname);
+    $.ajax({
+        url: 'controllor/edit_u_img',
+        type: 'POST',
+        cache: false,
+        data: formData,
+        processData: false,
+        contentType: false
+    }).done(function (res) {
+        alert(res);
+    }).fail(function (res) { });
+
 }

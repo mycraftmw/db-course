@@ -12,9 +12,9 @@ if ($conn -> connect_error) {
 }
 $uname = "\"" . $_POST ["uname"] . "\"";	
 if ($_FILES ["image"]["type"] == "image/jpeg") {
-	$uaddress = "image\\user\\" . mt_rand (0, 1000000) . ".jpg";
+	$uaddress = "img\\user\\" . mt_rand (0, 1000000) . ".jpg";
 	while (file_exists ($uaddress))
-		$uaddress = "image\\user\\" . mt_rand (0, 1000000) . ".jpg";
+		$uaddress = "img\\user\\" . mt_rand (0, 1000000) . ".jpg";
 	move_uploaded_file ($_FILES ["image"]["tmp_name"], $uaddress);
 	$uaddress = "\"" . $uaddress . "\"";
 }

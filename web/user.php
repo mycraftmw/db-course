@@ -129,8 +129,10 @@
       <div class="container col-xs-4">
         <img id='avator' src="img/item/guo.jpg" width="300px" >
         <br>
-        <input id='upavator' type="file">
-        <button type="button" class="btn btn-xs btn-success" onclick="uploadavator();">上传头像</button>
+        <form id='uploadForm' method='POST' action='controllor/edit_u_img' enctype="multipart/form-data">
+          <input id='upavator' name='image' type="file">
+          <button type="button" class="btn btn-xs btn-success" onclick="uploadavator();">上传头像</button>
+        </form>
       </div>
       <div class="container col-xs-8">
         <div class="row text-center">
