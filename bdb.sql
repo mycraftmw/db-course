@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-11-25 07:05:20
+-- Generation Time: 2016-11-25 14:02:10
 -- 服务器版本： 5.7.14
 -- PHP Version: 7.0.10
 
@@ -116,19 +116,19 @@ CREATE TABLE `charge` (
 --
 DELIMITER $$
 CREATE TRIGGER `TR_apply_charge` AFTER INSERT ON `charge` FOR EACH ROW BEGIN
-UPDATE Goods_1 SET Gstate = "交易中" WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
+UPDATE Goods_1 SET Gstate = "äº¤æ˜“ä¸­" WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
 END
 $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `TR_charge_state` AFTER UPDATE ON `charge` FOR EACH ROW BEGIN
-IF NEW.CHAplanstate = "审核通过" AND NEW.CHAadoptstate = "审核通过" THEN
+IF NEW.CHAplanstate = "äº¤æ˜“æˆåŠŸ" AND NEW.CHAadoptstate = "äº¤æ˜“æˆåŠŸ" THEN
 	UPDATE User_2 SET Ucredit = Ucredit + NEW.CHAadoptcredit WHERE Uname IN (SELECT Uname FROM G1 WHERE Gno = NEW.Gnoplan);
 	UPDATE User_2 SET Ucredit = Ucredit + NEW.CHAplancredit WHERE Uname IN (SELECT Uname FROM G1 WHERE Gno = NEW.Gnoadopt);
 	DELETE FROM Goods_1 WHERE Gno = Gnoplan OR Gno = Gnoadopt;
 END IF;
-IF NEW.CHAplanstate = "审核失败" AND NEW.CHAadoptstate = "审核失败" THEN
-	UPDATE Goods_1 SET Gstate = "市场中" WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
+IF NEW.CHAplanstate = "äº¤æ˜“å¤±è´¥" AND NEW.CHAadoptstate = "äº¤æ˜“å¤±è´¥" THEN
+	UPDATE Goods_1 SET Gstate = "å¸‚åœºä¸­" WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
 END IF;
 END
 $$
@@ -151,11 +151,11 @@ CREATE TABLE `credit` (
 --
 
 INSERT INTO `credit` (`Clevel`, `Cleft`, `Cright`) VALUES
-('水水会员', -1000, 0),
-('低级会员', 1, 40),
-('中级会员', 41, 80),
-('高级会员', 81, 100),
-('钻石会员', 101, 1000);
+('æ°´æ°´ä¼šå‘˜', -1000, 0),
+('ä½Žçº§ä¼šå‘˜', 1, 40),
+('ä¸­çº§ä¼šå‘˜', 41, 80),
+('é«˜çº§ä¼šå‘˜', 81, 100),
+('é’»çŸ³ä¼šå‘˜', 101, 1000);
 
 -- --------------------------------------------------------
 
@@ -173,7 +173,7 @@ CREATE TABLE `describle` (
 --
 DELIMITER $$
 CREATE TRIGGER `TR_edit_tag` AFTER INSERT ON `describle` FOR EACH ROW BEGIN
-UPDATE Good_2 SET Gcheck = "正在审核", Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
+UPDATE Good_2 SET Gcheck = "æ­£åœ¨å®¡æ ¸", Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
 END
 $$
 DELIMITER ;
@@ -198,7 +198,7 @@ CREATE TABLE `goods_1` (
 --
 DELIMITER $$
 CREATE TRIGGER `TR_add_goods` AFTER INSERT ON `goods_1` FOR EACH ROW BEGIN
-INSERT INTO Goods_2 VALUES (NEW.Gno, "正在审核", CURRENT_TIMESTAMP);
+INSERT INTO Goods_2 VALUES (NEW.Gno, "æ­£åœ¨å®¡æ ¸", CURRENT_TIMESTAMP);
 END
 $$
 DELIMITER ;
@@ -215,9 +215,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `TR_goods_state` AFTER UPDATE ON `goods_1` FOR EACH ROW BEGIN
 IF NEW.Gname != OLD.Gname OR NEW.Gtype != OLD.Gtype OR NEW.Gaddress != OLD.Gaddress  THEN
-	UPDATE Goods_2 SET Gcheck = "正在审核", Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
+	UPDATE Goods_2 SET Gcheck = "æ­£åœ¨å®¡æ ¸", Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
 END IF;
-IF NEW.Gstate != OLD.Gstate AND NEW.Gstate = "市场中" THEN
+IF NEW.Gstate != OLD.Gstate AND NEW.Gstate = "å¸‚åœºä¸­" THEN
 	DELETE FROM Charge WHERE Gnoplan = NEW.Gno OR Gnoadopt = NEW.Gno;
 END IF;
 END
@@ -241,10 +241,10 @@ CREATE TABLE `goods_2` (
 --
 DELIMITER $$
 CREATE TRIGGER `TR_goods_check` AFTER UPDATE ON `goods_2` FOR EACH ROW BEGIN
-IF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = "审核通过" THEN
-	UPDATE Goods_1 SET Gstate = "市场中" WHERE Gno = NEW.Gno;
-ELSEIF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = "正在审核" THEN
-	UPDATE Goods_1 SET Gstate = "审核中" WHERE Gno = NEW.Gno;
+IF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = "å®¡æ ¸é€šè¿‡" THEN
+	UPDATE Goods_1 SET Gstate = "å¸‚åœºä¸­" WHERE Gno = NEW.Gno;
+ELSEIF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = "æ­£åœ¨å®¡æ ¸" THEN
+	UPDATE Goods_1 SET Gstate = "å®¡æ ¸ä¸­" WHERE Gno = NEW.Gno;
 END IF;
 END
 $$
@@ -270,7 +270,7 @@ CREATE TABLE `goods_3` (
 DELIMITER $$
 CREATE TRIGGER `TR_edit_goods` AFTER UPDATE ON `goods_3` FOR EACH ROW BEGIN
 IF NEW.Ginstruction != OLD.Ginstruction OR NEW.Gparameter != OLD.Gparameter OR NEW.Gtime != OLD.Gtime OR NEW.Gprice != old.Gprice THEN
-	UPDATE Goods_2 SET Gcheck = "正在审核", Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
+	UPDATE Goods_2 SET Gcheck = "æ­£åœ¨å®¡æ ¸", Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
 END IF;
 END
 $$
@@ -336,8 +336,8 @@ CREATE TABLE `root` (
 --
 
 INSERT INTO `root` (`Rno`, `Rcontent`) VALUES
-(1, '删除物品'),
-(2, '审核物品');
+(1, 'åˆ é™¤ç‰©å“'),
+(2, 'å®¡æ ¸ç‰©å“');
 
 --
 -- 触发器 `root`
@@ -377,7 +377,6 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`Sno`, `Spassword`) VALUES
-('00000000', '00000000'),
 ('00000001', '00000001'),
 ('00000002', '00000002'),
 ('00000003', '00000003'),
@@ -417,11 +416,11 @@ CREATE TABLE `tag` (
 --
 
 INSERT INTO `tag` (`Tno`, `Tcontent`) VALUES
-('tag_meng', '萌'),
-('tag_shishang', '时尚'),
-('tag_gexing', '个性'),
-('tag_shiyong', '实用'),
-('tag_pinpai', '品牌');
+('tag_meng', 'èŒ'),
+('tag_shishang', 'æ—¶å°š'),
+('tag_gexing', 'ä¸ªæ€§'),
+('tag_shiyong', 'å®žç”¨'),
+('tag_pinpai', 'å“ç‰Œ');
 
 --
 -- 触发器 `tag`
@@ -450,7 +449,7 @@ CREATE TABLE `user_1` (
 --
 
 INSERT INTO `user_1` (`Uname`, `Sno`, `Uroot`) VALUES
-('亚当.肖华', '00000000', '管理员');
+('äºšå½“.è‚–åŽ', '00000000', 'ç®¡ç†å‘˜');
 
 -- --------------------------------------------------------
 
@@ -470,7 +469,7 @@ CREATE TABLE `user_2` (
 --
 
 INSERT INTO `user_2` (`Uname`, `Usexy`, `Ucredit`, `Uaddress`) VALUES
-('亚当.肖华', '男', 1000, NULL);
+('äºšå½“.è‚–åŽ', 'ç”·', 1000, '');
 
 -- --------------------------------------------------------
 
@@ -490,7 +489,7 @@ CREATE TABLE `user_3` (
 --
 
 INSERT INTO `user_3` (`Uname`, `Upassword`, `Uphone`, `Uemail`) VALUES
-('亚当.肖华', '00000000', '00000000000', '00000000@nba.com');
+('äºšå½“.è‚–åŽ', '00000000', '00000000000', '00000000000@nba.com');
 
 -- --------------------------------------------------------
 
@@ -508,8 +507,8 @@ CREATE TABLE `user_administrator_root` (
 --
 
 INSERT INTO `user_administrator_root` (`Uroot`, `Rno`) VALUES
-('用户', 2),
-('管理员', 1);
+('ç®¡ç†å‘˜', 1),
+('ç”¨æˆ·', 2);
 
 --
 -- Indexes for dumped tables
@@ -542,6 +541,7 @@ ALTER TABLE `describle`
 --
 ALTER TABLE `goods_1`
   ADD PRIMARY KEY (`Gno`),
+  ADD UNIQUE KEY `Gaddress` (`Gaddress`),
   ADD KEY `Uname` (`Uname`);
 
 --
