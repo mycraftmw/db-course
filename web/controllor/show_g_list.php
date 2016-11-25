@@ -12,7 +12,7 @@ if ($conn -> connect_error) {
 }
 $str = "\"市场中\"";
 $sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp, Ginstruction, Gparameter, Gtime, Gprice
-		FROM Goods_1, Goods_2
+		FROM Goods_1, Goods_2, Goods_3
 		WHERE
 		Goods_1.Gno = Goods_2.Gno AND 
 		Goods_1.Gno = Goods_3.Gno AND	

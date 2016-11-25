@@ -6,7 +6,7 @@ $dbname = "BDB";
 $conn = new mysqli ($servername, $username, $password, $dbname);
 
 if ($conn -> connect_error) {
-	$json = array ("status" => "n");
+	$json = array ("status" => "n1");
 	echo json_encode ($json);
 	exit;
 }
@@ -23,7 +23,7 @@ $result = $conn -> query ($sql);
 if ($result && mysqli_num_rows ($result)) {
 	$row = $result -> fetch_assoc ();
 	if(!$row['Uname']||!$row ["Sno"]){
-		$json = array ("status" => "n");
+		$json = array ("status" => "n2");
 		$conn -> close ();
 		echo json_encode ($json);
 		exit;
@@ -45,7 +45,7 @@ if ($result && mysqli_num_rows ($result)) {
 	exit;
 }
 else {
-	$json = array ("status" => "n");
+	$json = array ("status" => "n3");
 	$conn -> close ();
 	echo json_encode ($json);
 	exit;

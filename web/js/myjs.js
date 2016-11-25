@@ -58,16 +58,141 @@ function fillinfo() {
     if (document.cookie == '') {
         return;
     }
-    var data = eval('(' + document.cookie + ')');
-    document.getElementById('uiname').innerText = data.uname;
-    document.getElementById('uisno').innerText = data.sno;
-    document.getElementById('uisex').innerText = data.usexy;
-    document.getElementById('uicredit').innerText = data.ucredit;
-    document.getElementById('uiphone').innerText = data.uphone;
-    document.getElementById('uiemail').innerText = data.uemail;
-    document.getElementById('uiper').innerText = data.uroot;
-    document.getElementById('avator').src = data.uaddress;
+    var udata = eval('(' + document.cookie + ')');
+    document.getElementById('uiname').innerText = udata.uname;
+    document.getElementById('uisno').innerText = udata.sno;
+    document.getElementById('uisex').innerText = udata.usexy;
+    document.getElementById('uicredit').innerText = udata.ucredit;
+    document.getElementById('uiphone').innerText = udata.uphone;
+    document.getElementById('uiemail').innerText = udata.uemail;
+    document.getElementById('uiper').innerText = udata.uroot;
+    document.getElementById('avator').src = udata.uaddress;
+
+    if (udata.uroot == '管理员') {
+        document.getElementById('bltit').innerText = '待审核物品';
+        document.getElementById('blbtn').style.display = 'none';
+        $.ajax({
+            type: 'POST',
+            url: 'controllor/show_g_check_list',
+            data: {},
+            success: function (rdata) {
+                alert(rdata);
+                var rval = eval('(' + rdata + ')');
+                var ui = document.getElementById('itemlist');
+                if (rval.status == 'y') {
+                    for (var key in rval) {
+                        if (key != 'status' && rval.hasOwnProperty(key)) {
+                            var element = rval[key];
+                            var li = document.createElement('li');
+                            var img = document.createElement('img');
+                            var p = document.createElement('p');
+                            var lb = document.createElement('label');
+                            var btn = document.createElement('button');
+                            var btn2 = document.createElement('button');
+                            var br = document.createElement('br');
+                            img.src = element.gaddress;
+                            lb.innerText = element.gstate;
+                            p.innerText = element.gname;
+                            btn.setAttribute('class', 'btn btn-success');
+                            btn.setAttribute('onclick', 'check(' + element.gno + ',true);');
+                            btn.innerText = '通过';
+                            btn2.setAttribute('class', 'btn btn-danger');
+                            btn2.setAttribute('onclick', 'check(' + element.gno + ',false);');
+                            btn2.innerText = '不通过';
+                            li.appendChild(img);
+                            li.appendChild(p);
+                            li.appendChild(lb);
+                            li.appendChild(br);
+                            li.appendChild(btn);
+                            li.appendChild(btn2);
+                            ui.appendChild(li);
+                        }
+                    }
+                }
+            }
+        });
+
+        return;
+    }
+    $.ajax({
+        type: 'POST',
+        url: 'controllor/show_g_u_list',
+        data: {
+            uname: udata.uname
+        },
+        success: function (rdata) {
+            alert(rdata);
+            var rval = eval('(' + rdata + ')');
+            var ui = document.getElementById('itemlist');
+            if (rval.status == 'y') {
+                for (var key in rval) {
+                    if (key != 'status' && rval.hasOwnProperty(key)) {
+                        var element = rval[key];
+                        var li = document.createElement('li');
+                        var img = document.createElement('img');
+                        var p = document.createElement('p');
+                        var lb = document.createElement('label');
+                        var btn = document.createElement('button');
+                        var br = document.createElement('br');
+                        img.src = element.gaddress;
+                        lb.innerText = element.gstate;
+                        p.innerText = element.gname;
+                        btn.setAttribute('class', 'btn btn-danger');
+                        btn.setAttribute('onclick', 'udelitem(' + element.gno + ');');
+                        btn.innerText = '删除';
+                        li.appendChild(img);
+                        li.appendChild(p);
+                        li.appendChild(lb);
+                        li.appendChild(br);
+                        li.appendChild(btn);
+                        ui.appendChild(li);
+                    }
+                }
+            }
+        }
+    });
     return;
+}
+
+function check(no, ckbool) {
+    $.ajax({
+        type: 'POST',
+        url: 'controllor/check_g',
+        data: {
+            gno: no,
+            gcheck: ckbool == true ? '审核通过' : '审核失败'
+        },
+        success: function (rdata) {
+            alert(rdata);
+            var rval = eval('(' + rdata + ')');
+            if (rval.status == 'y') {
+                alert('操作成功');
+            } else {
+                alert('操作失败');
+            }
+            location.reload();
+        }
+    });
+}
+
+function udelitem(no) {
+    $.ajax({
+        type: 'POST',
+        url: 'controllor/delete_g',
+        data: {
+            gno: no
+        },
+        success: function (rdata) {
+            alert(rdata);
+            var rval = eval('(' + rdata + ')');
+            if (rval.status = 'y') {
+                alert('操作成功');
+            } else {
+                alert('操作失败');
+            }
+            location.reload();
+        }
+    });
 }
 
 function login() {
@@ -80,6 +205,7 @@ function login() {
             upassword: document.getElementById('luserpw').value
         },
         success: function (data) {
+            alert(data);
             var res = eval('(' + data + ')');
             if (res.status != 'y') {
                 alert('登录失败！');
@@ -143,25 +269,28 @@ function changepw() {
 }
 
 function search() {
-    alert('没写完');
-    var sd = { id: document.getElementById('searchbar').value };
+    alert(document.getElementById('searchbar').value);
     $.ajax({
         type: 'POST',
-        url: 'test',
-        data: sd,
-        success: function (data) {
-            var res = eval('(' + reval + ')');
+        url: 'controllor/show_g_search',
+        data: {
+            words: document.getElementById('searchbar').value
+        },
+        success: function (rdata) {
+            alert(rdata)
+            var rval = eval('(' + rdata + ')');
+
         }
     });
     return;
 }
 
 function fillMarket() {
-
     $.ajax({
         type: 'POST',
         url: 'controllor/show_g_list',
         success: function (data) {
+            alert(data);
             var res = eval('(' + data + ')');
             var k = [];
             for (var key in res) {
@@ -203,12 +332,6 @@ function buildItem(title, description, label, imgUrl) {
 }
 
 function uploadItem() {
-    // var ui = document.getElementById('itemlist');
-    // var li = document.createElement('li');
-    // li.innerText = document.getElementById('upitemdes').value;
-    // li.innerText = document.getElementById('upitemtit').value;
-    // ui.appendChild(li);
-
     var udata = eval('(' + document.cookie + ')');
     alert(1);
     $.ajax({
@@ -223,16 +346,15 @@ function uploadItem() {
             gtime: 0,
             gprice: 0
         },
-        success:function (rdata) {
+        success: function (rdata) {
             alert(rdata);
             var rval = eval('(' + rdata + ')');
             if (rval.status == 'y') {
                 alert("上传成功");
-                location.reload();
             } else {
                 alert("上传失败");
-                location.reload();
             }
+            location.reload();
         }
     });
     return;

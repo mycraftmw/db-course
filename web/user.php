@@ -169,9 +169,9 @@
       </div>
     </div>
     <div class="row">
-        <h2>我的物品</h2>
+        <h2 id='bltit' >我的物品</h2>
         <hr>
-        <a class="btn btn-danger" data-toggle="modal" data-target="#uploadmodal" >上传物品</a>
+        <a id='blbtn' class="btn btn-success" data-toggle="modal" data-target="#uploadmodal" >上传物品</a>
         <br>
         <br>
         <ul id='itemlist'>

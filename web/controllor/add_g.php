@@ -40,7 +40,7 @@ $conn -> query ("BEGIN;");
 $sql = "INSERT INTO Goods_1 VALUES ($gno, $gname, $uname, $gtype, $gaddress, $gstate);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
-	$json = array ("status" => "n1","a"=>"$gtype");
+	$json = array ("status" => "n1","a"=>"$gno");
 	$conn -> close ();			
 	echo json_encode ($json);
 	exit;
