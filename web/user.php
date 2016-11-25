@@ -259,8 +259,22 @@
             <input id='upitemimg' class='black' type="file">
           </p>
           <p>
+            <label class="black">物品名</label>
+            <input id='upitemtit' class='black' type="text" placeholder='输入物品名称'>
+          </p>
+          <p>
             <label class="black">描述</label>
             <input id='upitemdes' class='black' type="text" placeholder='输入物品描述'>
+          </p>
+          <p>
+            <label class="black">描述</label><br>
+            <select name="select" id="select_type" style="width: 70px;color: black;">
+              <option value="tag_meng">萌</option>
+              <option value="tag_shishang">时尚</option>
+              <option value="tag_gexing">个性</option>
+              <option value="tag_shiyong">实用</option>
+              <option value="tag_pinpai">品牌</option>
+          </select><br>
           </p>
         </div>
         <div class="modal-footer">

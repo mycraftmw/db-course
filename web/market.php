@@ -167,11 +167,11 @@
             <br>
             <ul class="text-center">
               <li><a href="javascript:void(0)" class="filter" data-filter="all">全部</a></li>
-              <li><a href="javascript:void(0)" class="filter" data-filter=".taga">萌</a></li>
-              <li><a href="javascript:void(0)" class="filter" data-filter=".tagb">时尚</a></li>
-              <li><a href="javascript:void(0)" class="filter" data-filter=".tagc">个性</a></li>
-              <li><a href="javascript:void(0)" class="filter" data-filter=".tagd">实用</a></li>
-              <li><a href="javascript:void(0)" class="filter" data-filter=".tage">品牌</a></li>
+              <li><a href="javascript:void(0)" class="filter" data-filter=".tag_meng">萌</a></li>
+              <li><a href="javascript:void(0)" class="filter" data-filter=".tag_shishang">时尚</a></li>
+              <li><a href="javascript:void(0)" class="filter" data-filter=".tag_gexing">个性</a></li>
+              <li><a href="javascript:void(0)" class="filter" data-filter=".tag_shiyong">实用</a></li>
+              <li><a href="javascript:void(0)" class="filter" data-filter=".tag_pinpai">品牌</a></li>
             </ul>
           </div>
           <!-- /portfolio item filtering -->
@@ -188,7 +188,7 @@
       <ul id="og-grid" class="og-grid">
 
         <!-- single portfolio item -->
-        <li class="mix taga">
+        <li class="mix tag_shiyong ">
           <a href="javascript:void(0)" data-largesrc="img/item/images.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
             <img src="img/item/images.jpg" width="100%">
             <div class="hover-mask">
@@ -200,7 +200,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix tagb">
+        <li class="mix tag_meng ">
           <a href="javascript:void(0)" data-largesrc="img/item/fdj.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
             <img src="img/item/fdj.jpg" width="100%">
             <div class="hover-mask">
@@ -212,7 +212,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix tagc">
+        <li class="mix tag_shishang ">
           <a href="javascript:void(0)" data-largesrc="img/item/th.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
             <img src="img/item/th.jpg" width="100%">
             <div class="hover-mask">
@@ -224,7 +224,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix tagd">
+        <li class="mix tag_pinpai ">
           <a href="javascript:void(0)" data-largesrc="img/item/hu.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
             <img src="img/item/hu.jpg" width="100%">
             <div class="hover-mask">
@@ -236,7 +236,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix taga">
+        <li class="mix tag_pinpai ">
           <a href="javascript:void(0)" data-largesrc="img/item/guo.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
             <img src="img/item/guo.jpg" width="100%">
             <div class="hover-mask">
@@ -248,7 +248,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix tagc">
+        <li class="mix tag_shiyong ">
           <a href="javascript:void(0)" data-largesrc="img/item/fozhu.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
             <img src="img/item/fozhu.jpg" width="100%">
             <div class="hover-mask">
@@ -260,7 +260,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix tage">
+        <li class="mix tag_shiyong">
           <a href="javascript:void(0)" data-largesrc="img/item/biao.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
             <img src="img/item/biao.jpg" width="100%">
             <div class="hover-mask">
@@ -272,7 +272,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix tage">
+        <li class="mix tag_shiyong">
           <a href="javascript:void(0)" data-largesrc="img/item/shu.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
             <img src="img/item/shu.jpg" width="100%">
             <div class="hover-mask">
@@ -284,7 +284,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix tagd">
+        <li class="mix tag_shiyong">
           <a href="javascript:void(0)" data-largesrc="img/item/tuolaji.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
             <img src="img/item/tuolaji.jpg" width="100%">
             <div class="hover-mask">
@@ -296,7 +296,7 @@
         <!-- /single portfolio item -->
 
         <!-- single portfolio item -->
-        <li class="mix taga">
+        <li class="mix tag_meng">
           <a href="javascript:void(0)" data-largesrc="img/item/wang.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
             <img src="img/item/wang.jpg" width="100%">
             <div class="hover-mask">
@@ -305,30 +305,6 @@
             </div>
           </a>
         </li>
-        <!-- /single portfolio item -->
-
-        <!-- single portfolio item -->
-        <!--<li class="mix web">
-          <a href="javascript:void(0)" data-largesrc="img/item/titian.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
-            <img src="img/item/titian.jpg" width="100%">
-            <div class="hover-mask">
-              <h3>Dandelion horseradish</h3>
-              <span><i class="fa fa-plus fa-2x"></i></span>
-            </div>
-          </a>
-        </li>-->
-        <!-- /single portfolio item -->
-
-        <!-- single portfolio item -->
-        <!--<li class="mix app">
-          <a href="javascript:void(0)" data-largesrc="img/item/xiyiji.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
-            <img src="img/item/xiyiji.jpg" width="100%">
-            <div class="hover-mask">
-              <h3>Azuki bean</h3>
-              <span><i class="fa fa-plus fa-2x"></i></span>
-            </div>
-          </a>
-        </li>-->
         <!-- /single portfolio item -->
 
       </ul>

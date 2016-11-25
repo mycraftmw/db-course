@@ -13,7 +13,7 @@ if ($conn -> connect_error) {
 $gname = "\"" . $_POST ["gname"] . "\"";	
 $uname = "\"" . $_POST ["uname"] . "\"";	
 $gtype = "\"" . $_POST ["gtype"] . "\"";
-if ($_FILES ["image"]["type"] == "image/jpeg") {
+if ($_FILES && $_FILES ["image"] && $_FILES ["image"]["type"]&&$_FILES ["image"]["type"] == "image/jpeg") {
 	$gaddress = "image\\goods\\" . mt_rand (0, 1000000) . ".jpg";
 	while (file_exists ($gaddress))
 		$gaddress = "image\\goods\\" . mt_rand (0, 1000000) . ".jpg";
@@ -21,10 +21,7 @@ if ($_FILES ["image"]["type"] == "image/jpeg") {
 	$gaddress = "\"" . $gaddress . "\"";
 }
 else {		
-	$json = array ("status" => "n");
-	$conn -> close ();			
-	echo json_encode ($json);
-	exit;
+	$gaddress='img/none.jpg';
 }
 $gstate = "\"审核中\"";
 $ginstruction = "\"" . $_POST ["ginstruction"] . "\"";	
@@ -43,7 +40,7 @@ $conn -> query ("BEGIN;");
 $sql = "INSERT INTO Goods_1 VALUES ($gno, $gname, $uname, $gtype, $gaddress, $gstate);";
 if (!($conn -> query ($sql))) {
 	$conn -> query ("ROLLBACK;");
-	$json = array ("status" => "n1");
+	$json = array ("status" => "n1","a"=>"$gtype");
 	$conn -> close ();			
 	echo json_encode ($json);
 	exit;

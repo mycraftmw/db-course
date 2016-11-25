@@ -157,7 +157,7 @@ function search() {
 }
 
 function fillMarket() {
-    
+
     $.ajax({
         type: 'POST',
         url: 'controllor/show_g_list',
@@ -171,14 +171,14 @@ function fillMarket() {
                     var itemDescription = "23";
                     var itemLabel = element.gtype;
                     var imgUrl = element.gaddress;
-                    
+
                     k.push(buildItem(itemTitle, itemDescription, itemLabel, imgUrl));
                 }
             }
             Grid.addItems(k);
         }
     });
-    
+
     return;
 }
 
@@ -203,10 +203,38 @@ function buildItem(title, description, label, imgUrl) {
 }
 
 function uploadItem() {
-    var ui = document.getElementById('itemlist');
-    var li = document.createElement('li');
-    li.innerText = document.getElementById('upitemdes').value;
-    ui.appendChild(li);
+    // var ui = document.getElementById('itemlist');
+    // var li = document.createElement('li');
+    // li.innerText = document.getElementById('upitemdes').value;
+    // li.innerText = document.getElementById('upitemtit').value;
+    // ui.appendChild(li);
+
+    var udata = eval('(' + document.cookie + ')');
+    alert(1);
+    $.ajax({
+        type: 'POST',
+        url: 'controllor/add_g',
+        data: {
+            gname: document.getElementById('upitemtit').value,
+            uname: udata.uname,
+            gtype: document.getElementById('select_type').value,
+            ginstruction: document.getElementById('upitemdes').value,
+            gparameter: '',
+            gtime: 0,
+            gprice: 0
+        },
+        success:function (rdata) {
+            alert(rdata);
+            var rval = eval('(' + rdata + ')');
+            if (rval.status == 'y') {
+                alert("上传成功");
+                location.reload();
+            } else {
+                alert("上传失败");
+                location.reload();
+            }
+        }
+    });
     return;
 }
 
