@@ -12,11 +12,11 @@ if ($conn -> connect_error) {
 }
 $gno = $_POST ["gno"];
 if ($_FILES ["image"]["type"] == "image/jpeg") {
-	$gaddress = "image\\goods\\" . mt_rand (0, 1000000) . ".jpg";
-	while (file_exists ($gaddress))
-		$gaddress = "image\\goods\\" . mt_rand (0, 1000000) . ".jpg";
-	move_uploaded_file ($_FILES ["image"]["tmp_name"], $gaddress);
-	$gaddress = "\"" . $gaddress . "\"";
+	$ogaddress = "img/item/" . mt_rand (0, 1000000) . ".jpg";
+	while (file_exists ($ogaddress))
+		$ogaddress = "img/item/" . mt_rand (0, 1000000) . ".jpg";
+	move_uploaded_file ($_FILES ["image"]["tmp_name"], $ogaddress);
+	$gaddress = "\"" . $ogaddress . "\"";
 }
 else {
 	$json = array ("status" => "n");
@@ -35,6 +35,7 @@ if (!($conn -> query ($sql))) {
 }
 $conn -> query ("COMMIT;");
 $json = array ("status" => "y");
+$json['imgUrl']=$ogaddress;
 $conn -> close ();			
 echo json_encode ($json);
 exit;

@@ -11,12 +11,12 @@ if ($conn -> connect_error) {
 	exit;
 }
 $uname = "\"" . $_POST ["uname"] . "\"";	
-if ($_FILES ["image"]["type"] == "image/jpeg") {
-	$uaddress = "img\\user\\" . mt_rand (0, 1000000) . ".jpg";
-	while (file_exists ($uaddress))
-		$uaddress = "img\\user\\" . mt_rand (0, 1000000) . ".jpg";
-	move_uploaded_file ($_FILES ["image"]["tmp_name"], $uaddress);
-	$uaddress = "\"" . $uaddress . "\"";
+if ($_FILES ["image"]["type"] != "") {
+	$ouaddress = "img/user/" . mt_rand (0, 1000000) . ".jpg";
+	while (file_exists ($ouaddress))
+		$ouaddress = "img/user/" . mt_rand (0, 1000000) . ".jpg";
+	move_uploaded_file ($_FILES ["image"]["tmp_name"], "D:/code/repository/db-course/web/".$ouaddress);
+	$uaddress = "\"" . $ouaddress . "\"";
 }
 else {
 	$json = array ("status" => "n");
@@ -35,6 +35,7 @@ if (!($conn -> query ($sql))) {
 }
 $conn -> query ("COMMIT;");
 $json = array ("status" => "y");
+$json['imgUrl']= $ouaddress;
 $conn -> close ();			
 echo json_encode ($json);
 exit;

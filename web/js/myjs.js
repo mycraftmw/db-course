@@ -371,9 +371,11 @@ function uploadavator() {
         cache: false,
         data: formData,
         processData: false,
-        contentType: false
+        contentType: false,
     }).done(function (res) {
-        alert(res);
+        var rval = eval('(' + res + ')');        
+        udata.uaddress = rval.imgUrl;
+        document.cookie = JSON.stringify(udata);
+        location.reload();
     }).fail(function (res) { });
-
 }
