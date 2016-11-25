@@ -102,7 +102,7 @@
           <li><a href="index">首页</a></li>
           <li><a href="market">市场</a></li>
           <li><a id="inmsg" href="message">消息</a></li>
-          <li><a id="outlg" data-toggle="modal" data-target="#login" href="javasript:void(0);">登录</a></li>
+          <li><a id="outlg" href='#' data-toggle="modal" data-target="#login">登录</a></li>
           <li><a id="outrg" href="register">注册</a></li>
           <li><a id="inname" href="user"></a></li>          
         </ul>
@@ -136,13 +136,35 @@
           </p>
         </div>
         <div class="modal-footer">
-          <a href="#" class="btn btn-success black" onclick="login()">登录</a>
-          <a href="#" class="btn black " data-dismiss="modal">关闭</a>
+          <a href='#' class="btn btn-success black" onclick="login()">登录</a>
+          <a href='#' class="btn black " data-dismiss="modal">关闭</a>
         </div>
       </div>
     </div>
   </div>
 
+   <!--消息模态框（Modal） -->
+  <div id="msgmsg" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">×</a>
+          <h3 class="black">联系物主</h3>
+        </div>
+        <div class="modal-body">
+          <p>
+            <label class="black">消息：</label>
+            <input id="msgs" style='width:480px;' type="text" name="username" placeholder="消息" style='color:black;'/><br>
+            <input id="applycha" type="checkbox" name="app"><label for='applycha' style='color:black;'>同时发送交易请求</label> 
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a href='#' id='sendbtn' class="btn btn-success black" onclick="sendmsg(admin);">发送</a>
+          <a href='#' class="btn black " data-dismiss="modal">关闭</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Start Portfolio Section
         =========================================== -->

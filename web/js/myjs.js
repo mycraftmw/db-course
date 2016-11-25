@@ -91,6 +91,7 @@ function fillinfo() {
                             var btn2 = document.createElement('button');
                             var br = document.createElement('br');
                             img.src = element.gaddress;
+                            img.width = 300;
                             lb.innerText = element.gstate;
                             p.innerText = element.gname;
                             btn.setAttribute('class', 'btn btn-success');
@@ -133,18 +134,25 @@ function fillinfo() {
                         var p = document.createElement('p');
                         var lb = document.createElement('label');
                         var btn = document.createElement('button');
-                        var br = document.createElement('br');
+                        var btn2 = document.createElement('button');
                         img.src = element.gaddress;
+                        img.width = 300;
                         lb.innerText = element.gstate;
                         p.innerText = element.gname;
                         btn.setAttribute('class', 'btn btn-danger');
                         btn.setAttribute('onclick', 'udelitem(' + element.gno + ');');
                         btn.innerText = '删除';
+                        btn2.setAttribute('class', 'btn btn-success');
+                        btn2.setAttribute('onclick', 'openmd(' + element.gno + ')');
+                        btn2.innerText = '交易完成';
                         li.appendChild(img);
                         li.appendChild(p);
                         li.appendChild(lb);
-                        li.appendChild(br);
+                        li.appendChild(document.createElement('br'));
                         li.appendChild(btn);
+                        li.appendChild(document.createElement('br'));
+                        li.appendChild(btn2);
+                        li.appendChild(document.createElement('hr'));
                         ui.appendChild(li);
                     }
                 }
@@ -152,6 +160,33 @@ function fillinfo() {
         }
     });
     return;
+}
+
+function openmd(no) {
+    document.getElementById('overbtn').setAttribute('onclick', 'uoveritem(' + no + ');');
+    $("#jiaoyi").modal();
+}
+
+function uoveritem(no) {
+    $.ajax({
+        url: 'controllor/update_cha',
+        type: 'POST',
+        data: {
+            gno: no,
+            state: document.getElementById('select_jiaoyi').value,
+            credit: document.getElementById('upcredit').value
+        },
+        success: function (rdata) {
+            alert(rdata);
+            var rval = eval('(' + rdata + ')');
+            if (rval.status == 'y') {
+                alert("操作成功");
+            } else {
+                alert("操作失败");
+            }
+            location.reload();
+        }
+    });
 }
 
 function check(no, ckbool) {
@@ -296,12 +331,7 @@ function fillMarket() {
             for (var key in res) {
                 if (key != 'status' && res.hasOwnProperty(key)) {
                     var element = res[key];
-                    var itemTitle = element.gname;
-                    var itemDescription = "23";
-                    var itemLabel = element.gtype;
-                    var imgUrl = element.gaddress;
-
-                    k.push(buildItem(itemTitle, itemDescription, itemLabel, imgUrl));
+                    k.push(buildItem(element.gname, element.ginstruction, element.gtype, element.gaddress, element.uname, element.gno));
                 }
             }
             Grid.addItems(k);
@@ -311,7 +341,7 @@ function fillMarket() {
     return;
 }
 
-function buildItem(title, description, label, imgUrl) {
+function buildItem(title, description, label, imgUrl, owner, gno) {
     var kuang = document.getElementById('og-grid');
     var li = document.createElement('li');
     var a = document.createElement('a');
@@ -322,7 +352,8 @@ function buildItem(title, description, label, imgUrl) {
     li.className = 'mix ' + label;
     li.setAttribute('style', 'display: inline-block;');
     li.appendChild(a);
-    a.setAttribute('href', "javascipt:;");
+    document.getElementById('sendbtn').setAttribute('onclick', "sendmsg(\'" + owner + "\',\'" + gno + "\');");
+    a.setAttribute('href', 'javascript:$("#msgmsg").modal();');
     a.setAttribute('data-largesrc', imgUrl);
     a.setAttribute('data-title', title);
     a.setAttribute('data-description', description);
@@ -331,32 +362,78 @@ function buildItem(title, description, label, imgUrl) {
     return li;
 }
 
-function uploadItem() {
+function sendmsg(endname, gno) {
+    if (document.cookie == '') {
+        alert('未登陆无法发送消息');
+        return false;
+    }
     var udata = eval('(' + document.cookie + ')');
-    alert(1);
+    if ($('#applycha').is(':checked')) {
+        $.ajax({
+            url: 'controllor/apply_cha',
+            type: 'POST',
+            data: {
+                gnoplan: gno,
+                gnoadopt: gno,
+                chamoney: 0
+            },
+            success: function (rdata) {
+                alert(rdata);
+            }
+        });
+    }
+    if (document.getElementById('msgs').value == '')
+        return false;
     $.ajax({
+        url: 'controllor/notify',
         type: 'POST',
-        url: 'controllor/add_g',
         data: {
-            gname: document.getElementById('upitemtit').value,
-            uname: udata.uname,
-            gtype: document.getElementById('select_type').value,
-            ginstruction: document.getElementById('upitemdes').value,
-            gparameter: '',
-            gtime: 0,
-            gprice: 0
+            unamesend: udata.uname,
+            unamereceive: endname,
+            mcontent: document.getElementById('msgs').value
         },
         success: function (rdata) {
             alert(rdata);
             var rval = eval('(' + rdata + ')');
             if (rval.status == 'y') {
-                alert("上传成功");
+                alert('发送成功');
             } else {
-                alert("上传失败");
+                alert('发送失败');
             }
             location.reload();
         }
     });
+}
+
+function uploadItem() {
+    var udata = eval('(' + document.cookie + ')');
+    var formData = new FormData();
+    formData.append('image', $('#upitemimg')[0].files[0]);
+    formData.append('uname', udata.uname);
+    formData.append('gname', document.getElementById('upitemtit').value);
+    formData.append('gtype', document.getElementById('select_type').value);
+    formData.append('ginstruction', document.getElementById('upitemdes').value);
+    formData.append('gparameter', '');
+    formData.append('gtime', 0);
+    formData.append('gprice', 0);
+
+    $.ajax({
+        url: 'controllor/add_g',
+        type: 'POST',
+        cache: false,
+        data: formData,
+        processData: false,
+        contentType: false,
+    }).done(function (res) {
+        alert(res);
+        var rval = eval('(' + res + ')');
+        if (rval.status == 'y') {
+            alert("上传成功");
+        } else {
+            alert("上传失败");
+        }
+        location.reload();
+    }).fail(function (res) { });
     return;
 }
 
@@ -373,9 +450,48 @@ function uploadavator() {
         processData: false,
         contentType: false,
     }).done(function (res) {
-        var rval = eval('(' + res + ')');        
+        var rval = eval('(' + res + ')');
         udata.uaddress = rval.imgUrl;
         document.cookie = JSON.stringify(udata);
         location.reload();
     }).fail(function (res) { });
+}
+
+function fillmsg() {
+    if (document.cookie == '') {
+        alert('未登陆无法接受消息');
+        return false;
+    }
+    var udata = eval('(' + document.cookie + ')');
+    $.ajax({
+        url: 'controllor/show_notification',
+        type: 'POST',
+        data: {
+            uname: udata.uname
+        },
+        success: function (rdata) {
+            alert(rdata);
+            var rval = eval('(' + rdata + ')');
+            if (rval.status == 'y') {
+                for (var key in rval) {
+                    if (key != 'status' && rval.hasOwnProperty(key)) {
+                        var element = rval[key];
+                        buildmsg(element.unamesend, element.mtimestamp, element.mcontent);
+                    }
+                }
+            }
+        }
+    })
+}
+
+function buildmsg(name, time, content) {
+    var li = document.createElement('li');
+    var p1 = document.createElement('p');
+    var p2 = document.createElement('p');
+    p1.innerText = name + " 于 " + time + " 发来消息：";
+    p2.innerText = content;
+    li.appendChild(p1);
+    li.appendChild(p2);
+    li.appendChild(document.createElement('hr'));
+    document.getElementById('msglist').appendChild(li);
 }

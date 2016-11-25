@@ -129,10 +129,8 @@
       <div class="container col-xs-4">
         <img id='avator' src="img/item/guo.jpg" width="300px" >
         <br>
-        <form id='uploadForm' method='POST' action='controllor/edit_u_img' enctype="multipart/form-data">
-          <input id='upavator' name='image' type="file">
-          <button type="button" class="btn btn-xs btn-success" onclick="uploadavator();">上传头像</button>
-        </form>
+        <input id='upavator' name='image' type="file">
+        <button type="button" class="btn btn-xs btn-success" onclick="uploadavator();">上传头像</button>
       </div>
       <div class="container col-xs-8">
         <div class="row text-center">
@@ -247,7 +245,7 @@
     </div>
   </div>
 
-    <!-- 模态框（Modal） -->
+    <!-- 上传模态框（Modal） -->
   <div id="uploadmodal" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -258,7 +256,7 @@
         <div class="modal-body">
           <p>
             <label class="black">图片</label>
-            <input id='upitemimg' class='black' type="file">
+            <input id='upitemimg' class='black' name='image' type="file">
           </p>
           <p>
             <label class="black">物品名</label>
@@ -286,6 +284,38 @@
       </div>
     </div>
   </div>
+
+    <!-- 交易模态框（Modal） -->
+  <div id="jiaoyi" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">×</a>
+          <h3 class="black">交易完成</h3>
+        </div>
+        <div class="modal-body">
+          <p>
+            <label class="black">交易状态</label><br>
+            <select name="select" id="select_jiaoyi" style="width: 100px;color: black;">
+              <option value="交易成功">交易成功</option>
+              <option value="交易失败">交易失败</option>
+            </select>  
+          </p>
+          <p>
+            <label class="black">信誉度</label>
+            <input id='upcredit' style='width:50px;' class='black' type="text" placeholder='1-5'>
+            <label class="black">hint:输入希望给出的信誉度(可以为1-5的整数，范围之外的整数视为两端极值)</label>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <a  id='overbtn' href="#" class="btn btn-success black" onclick="uoveritem();">确认</a>
+          <a href="#" class="btn black " data-dismiss="modal">关闭</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- 
         Essential Scripts
         =====================================-->

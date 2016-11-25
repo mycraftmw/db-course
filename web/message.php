@@ -148,15 +148,7 @@
   <div class="container">
     <h1>消息列表</h1>
     <hr>
-    <ul>
-      <li>
-        <p>2016/11/11 10:30</p>
-        <p>欢迎使用</p>
-      </li>
-      <li>
-        <p>2016/11/11 10:00</p>
-        <p>注册成功</p>
-      </li>
+    <ul id='msglist'>
     </ul>
   </div>
   
@@ -249,6 +241,7 @@
   <script>
     $(function ($){
       modifybar();
+      fillmsg();
     });
   </script>
 </body>

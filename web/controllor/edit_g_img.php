@@ -14,7 +14,7 @@ $gno = $_POST ["gno"];
 if ($_FILES ["image"]["type"] != "") {
 	$ogaddress = "img/item/" . mt_rand (0, 1000000) . ".jpg";
 	while (file_exists ($ogaddress))
-		$ogaddress = "image/item/" . mt_rand (0, 1000000) . ".jpg";
+		$ogaddress = "img/item/" . mt_rand (0, 1000000) . ".jpg";
 	move_uploaded_file ($_FILES ["image"]["tmp_name"], "D:/code/repository/db-course/web/" . $ogaddress);
 	$gaddress = "\"" . $ogaddress . "\"";
 }
