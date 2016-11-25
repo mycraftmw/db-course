@@ -17,11 +17,7 @@ $sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gche
 		WHERE
 		Goods_1.Gno = Goods_2.Gno AND
 		Goods_1.Gno = Goods_3.Gno AND	
-		Gstate = $str AND
-		(Gname = $words OR Gtype = $words OR
-		(Goods_1.Gno = Describle.Gno AND
-		Describle.Tno = Tag.Tno AND
-		Tcontent = $words))
+		Gstate = $str 
 		ORDER BY Gtimestamp DESC;";
 $result = $conn -> query ($sql);
 
