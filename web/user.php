@@ -153,7 +153,7 @@
             <h4 id="uicredit">不错</h4>
             <h4 id="uiphone">13000000000</h4>
             <h4 id="uiemail">daguo@buaa.edu.cn</h4>
-            <h4 id="uiper">管理员</h4>            
+            <h4 id="uiper">鬼魂</h4>            
             <input id="uiopw" class="black" type="password" name="old">
             <input id="uinpw" class="black" type="password" name="new">
             <input id="uicnpw" class="black" type="password" name="cnew">

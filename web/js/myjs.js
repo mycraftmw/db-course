@@ -65,6 +65,7 @@ function fillinfo() {
     document.getElementById('uicredit').innerText = data.ucredit;
     document.getElementById('uiphone').innerText = data.uphone;
     document.getElementById('uiemail').innerText = data.uemail;
+    document.getElementById('uiper').innerText = data.uroot;
     document.getElementById('avator').src = data.uaddress;
     return;
 }
@@ -161,7 +162,6 @@ function fillMarket() {
         type: 'POST',
         url: 'controllor/show_g_list',
         success: function (data) {
-            alert(data);
             var res = eval('(' + data + ')');
             var k = [];
             for (var key in res) {
