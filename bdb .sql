@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-11-24 15:31:27
+-- Generation Time: 2016-11-24 19:36:16
 -- 服务器版本： 5.7.14
 -- PHP Version: 7.0.10
 
@@ -19,6 +19,80 @@ SET time_zone = "+00:00";
 --
 -- Database: `bdb`
 --
+
+DELIMITER $$
+--
+-- 存储过程
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Charge_insert` (`gnoplan` INT, `gnoadopt` INT, `chamoney` INT)  BEGIN
+INSERT INTO Charge VALUES (gnoplan, gnoadopt, chamoney, "等待审核", 0, "等待审核", 0, CURRENT_TIMESTAMP);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Charge_update` (`gnoplan` INT, `gnoadopt` INT, `chamoney` INT, `chaplanstate` VARCHAR(40), `chaplancredit` INT, `chaadoptstate` VARCHAR(40), `chaadoptcredit` INT)  BEGIN
+INSERT INTO Charge VALUES (gnoplan, gnoadopt, chamoney, chaplanstate, chaplancredit, chaadoptstate, chaadoptcredit, CURRENT_TIMESTAMP);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Goods_1_insert` (`gno` INT, `gname` VARCHAR(40), `uname` VARCHAR(40), `gtype` VARCHAR(40), `gaddress` VARCHAR(40))  BEGIN
+INSERT INTO Goods_1 VALUES (gno, gname, uname, gtype, gaddress, "审核中");
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Goods_3_insert` (`gno` INT, `ginstruction` VARCHAR(400), `gparameter` VARCHAR(400), `gtime` INT, `gprice` INT)  BEGIN
+INSERT INTO Goods_3 VALUES (gno, ginstruction, gparameter, gtime, gprice);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Goods_delete` (`gno` INT)  BEGIN
+DELETE FROM G1 WHERE Gno = gno;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Goods_information` (`gno` INT)  BEGIN
+SELECT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp, Ginstruction, Gparameter, Gtime, Gprice
+FROM Goods_1, Goods_2, Goods_3
+WHERE
+Goods_1.Gno = Goods_2.Gno AND
+Goods_1.Gno = Goods_3.Gno AND
+Goods_1.Gno = gno;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Goods_tag_insert` (`gno` INT, `tno` VARCHAR(40))  BEGIN
+INSERT INTO Describle VALUES (gno, tno);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Message_information` (`mno` INT)  BEGIN
+SELECT Mcontent, CURRENT_TIMESTAMP, Unamesend, Unamereceive
+FROM Message, Notify
+WHERE
+Message.Mno = Notify.Mno AND
+Mno = mno;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Message_insert` (`Mno` INT, `Mcontent` VARCHAR(400), `unamesend` VARCHAR(40), `unamereceive` VARCHAR(40))  BEGIN
+INSERT INTO Message VALUES (Mno, Mcontent, CURRENT_TIMESTAMP);
+INSERT INTO Notify VALUES (Mno, unamesend, unamereceive);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `User_1_insert` (`uname` VARCHAR(40), `sno` CHAR(8), `uroot` VARCHAR(40))  BEGIN
+INSERT INTO User_1 VALUES (uname, sno, uroot);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `User_2_insert` (`uname` VARCHAR(40), `usexy` VARCHAR(40), `uaddress` VARCHAR(40))  BEGIN
+INSERT INTO User_2 VALUES (uname, usexy, 60, uaddress);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `User_3_insert` (`uname` VARCHAR(40), `upassword` VARCHAR(40), `uphone` CHAR(11), `uemail` VARCHAR(40))  BEGIN
+INSERT INTO User_3 VALUES (uname, upassword, uphone, uemail);
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `User_information` (`uname` VARCHAR(40), `upassword` VARCHAR(40))  BEGIN
+SELECT User_1.Uname, Sno, Uroot, Usexy, Ucredit, Uaddress, Upassword, Uphone, Uemail 
+FROM User_1, User_2, User_3 
+WHERE 
+User_1.Uname = User_2.Uname AND
+User_1.Uname = User_3.Uname AND
+User_1.Uname = @uname AND 
+Upassword = @upassword;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -42,19 +116,19 @@ CREATE TABLE `charge` (
 --
 DELIMITER $$
 CREATE TRIGGER `TR_apply_charge` AFTER INSERT ON `charge` FOR EACH ROW BEGIN
-UPDATE Goods_1 SET Gstate = "äº¤æ˜“ä¸­" WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
+UPDATE Goods_1 SET Gstate = "交易中" WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
 END
 $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `TR_charge_state` AFTER UPDATE ON `charge` FOR EACH ROW BEGIN
-IF NEW.CHAplanstate = "äº¤æ˜“æˆåŠŸ" AND NEW.CHAadoptstate = "äº¤æ˜“æˆåŠŸ" THEN
+IF NEW.CHAplanstate = "审核通过" AND NEW.CHAadoptstate = "审核通过" THEN
 	UPDATE User_2 SET Ucredit = Ucredit + NEW.CHAadoptcredit WHERE Uname IN (SELECT Uname FROM G1 WHERE Gno = NEW.Gnoplan);
 	UPDATE User_2 SET Ucredit = Ucredit + NEW.CHAplancredit WHERE Uname IN (SELECT Uname FROM G1 WHERE Gno = NEW.Gnoadopt);
 	DELETE FROM Goods_1 WHERE Gno = Gnoplan OR Gno = Gnoadopt;
 END IF;
-IF NEW.CHAplanstate = "äº¤æ˜“å¤±è´¥" AND NEW.CHAadoptstate = "äº¤æ˜“å¤±è´¥" THEN
-	UPDATE Goods_1 SET Gstate = "å¸‚åœºä¸­" WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
+IF NEW.CHAplanstate = "审核失败" AND NEW.CHAadoptstate = "审核失败" THEN
+	UPDATE Goods_1 SET Gstate = "市场中" WHERE Gno = NEW.Gnoplan OR Gno = NEW.Gnoadopt;
 END IF;
 END
 $$
@@ -99,7 +173,7 @@ CREATE TABLE `describle` (
 --
 DELIMITER $$
 CREATE TRIGGER `TR_edit_tag` AFTER INSERT ON `describle` FOR EACH ROW BEGIN
-UPDATE Good_2 SET Gcheck = "æ­£åœ¨å®¡æ ¸", Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
+UPDATE Good_2 SET Gcheck = "正在审核", Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
 END
 $$
 DELIMITER ;
@@ -124,7 +198,7 @@ CREATE TABLE `goods_1` (
 --
 DELIMITER $$
 CREATE TRIGGER `TR_add_goods` AFTER INSERT ON `goods_1` FOR EACH ROW BEGIN
-INSERT INTO Goods_2 VALUES (NEW.Gno, "æ­£åœ¨å®¡æ ¸", CURRENT_TIMESTAMP);
+INSERT INTO Goods_2 VALUES (NEW.Gno, "正在审核", CURRENT_TIMESTAMP);
 END
 $$
 DELIMITER ;
@@ -141,9 +215,9 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `TR_goods_state` AFTER UPDATE ON `goods_1` FOR EACH ROW BEGIN
 IF NEW.Gname != OLD.Gname OR NEW.Gtype != OLD.Gtype OR NEW.Gaddress != OLD.Gaddress  THEN
-	UPDATE Goods_2 SET Gcheck = "æ­£åœ¨å®¡æ ¸", Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
+	UPDATE Goods_2 SET Gcheck = "正在审核", Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
 END IF;
-IF NEW.Gstate != OLD.Gstate AND NEW.Gstate = "å¸‚åœºä¸­" THEN
+IF NEW.Gstate != OLD.Gstate AND NEW.Gstate = "市场中" THEN
 	DELETE FROM Charge WHERE Gnoplan = NEW.Gno OR Gnoadopt = NEW.Gno;
 END IF;
 END
@@ -167,10 +241,10 @@ CREATE TABLE `goods_2` (
 --
 DELIMITER $$
 CREATE TRIGGER `TR_goods_check` AFTER UPDATE ON `goods_2` FOR EACH ROW BEGIN
-IF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = "å®¡æ ¸é€šè¿‡" THEN
-	UPDATE Goods_1 SET Gstate = "å¸‚åœºä¸­" WHERE Gno = NEW.Gno;
-ELSEIF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = "æ­£åœ¨å®¡æ ¸" THEN
-	UPDATE Goods_1 SET Gstate = "å®¡æ ¸ä¸­" WHERE Gno = NEW.Gno;
+IF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = "审核通过" THEN
+	UPDATE Goods_1 SET Gstate = "市场中" WHERE Gno = NEW.Gno;
+ELSEIF NEW.Gcheck != OLD.Gcheck AND NEW.Gcheck = "正在审核" THEN
+	UPDATE Goods_1 SET Gstate = "审核中" WHERE Gno = NEW.Gno;
 END IF;
 END
 $$
@@ -196,7 +270,7 @@ CREATE TABLE `goods_3` (
 DELIMITER $$
 CREATE TRIGGER `TR_edit_goods` AFTER UPDATE ON `goods_3` FOR EACH ROW BEGIN
 IF NEW.Ginstruction != OLD.Ginstruction OR NEW.Gparameter != OLD.Gparameter OR NEW.Gtime != OLD.Gtime OR NEW.Gprice != old.Gprice THEN
-	UPDATE Goods_2 SET Gcheck = "æ­£åœ¨å®¡æ ¸", Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
+	UPDATE Goods_2 SET Gcheck = "正在审核", Gtimestamp = CURRENT_TIMESTAMP WHERE Gno = NEW.Gno;
 END IF;
 END
 $$
