@@ -13,16 +13,15 @@ if ($conn -> connect_error) {
 $gname = "\"" . $_POST ["gname"] . "\"";	
 $uname = "\"" . $_POST ["uname"] . "\"";	
 $gtype = "\"" . $_POST ["gtype"] . "\"";
-if ($_FILES && $_FILES ["image"] && $_FILES ["image"]["type"]&&$_FILES ["image"]["type"] == "image/jpeg") {
-	$gaddress = "image\\goods\\" . mt_rand (0, 1000000) . ".jpg";
-	while (file_exists ($gaddress))
-		$gaddress = "image\\goods\\" . mt_rand (0, 1000000) . ".jpg";
-	move_uploaded_file ($_FILES ["image"]["tmp_name"], $gaddress);
-	$gaddress = "\"" . $gaddress . "\"";
+if ($_FILES ["image"]["type"] != "") {
+	$ogaddress = "img/item/" . mt_rand (0, 1000000) . ".jpg";
+	while (file_exists ($ogaddress))
+		$ogaddress = "image/item/" . mt_rand (0, 1000000) . ".jpg";
+	move_uploaded_file ($_FILES ["image"]["tmp_name"], "D:/code/repository/db-course/web/" . $ogaddress);
+	$gaddress = "\"" . $ogaddress . "\"";
 }
-else {		
+else		
 	$gaddress="\"img/none.jpg\"";
-}
 $gstate = "\"审核中\"";
 $ginstruction = "\"" . $_POST ["ginstruction"] . "\"";	
 $gparameter = "\"" . $_POST ["gparameter"] . "\"";	
