@@ -13,11 +13,20 @@ if ($conn -> connect_error) {
 $words = "\"" . $_POST ["words"] . "\"";
 $str = "\"市场中\"";	
 $sql = "SELECT DISTINCT Goods_1.Gno, Gname, Uname, Gtype, Gaddress, Gstate, Gcheck, Gtimestamp, Ginstruction, Gparameter, Gtime, Gprice
-		FROM Goods_1, Goods_2, Goods_3, Describle, Tag
+		FROM Goods_1, Goods_2, Goods_3
 		WHERE
 		Goods_1.Gno = Goods_2.Gno AND
 		Goods_1.Gno = Goods_3.Gno AND	
-		Gstate = $str 
+		Gstate = $str AND
+		(Gname = $words OR
+		Gtype = $words OR
+		($words IN (
+		SELECT Tcontent 
+		FROM
+		Describle, Tag
+		WHERE
+		Goods_1.Gno = Describle.Gno AND
+		Describle.Tno = Tag.Tno)))
 		ORDER BY Gtimestamp DESC;";
 $result = $conn -> query ($sql);
 
