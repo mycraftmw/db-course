@@ -21,7 +21,7 @@ if ($_FILES && $_FILES ["image"] && $_FILES ["image"]["type"]&&$_FILES ["image"]
 	$gaddress = "\"" . $gaddress . "\"";
 }
 else {		
-	$gaddress='img/none.jpg';
+	$gaddress="\"img/none.jpg\"";
 }
 $gstate = "\"审核中\"";
 $ginstruction = "\"" . $_POST ["ginstruction"] . "\"";	
