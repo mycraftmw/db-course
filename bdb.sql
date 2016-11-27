@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2016-11-25 14:02:10
+-- Generation Time: 2016-11-27 07:34:39
 -- 服务器版本： 5.7.14
--- PHP Version: 7.0.10
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -194,6 +194,16 @@ CREATE TABLE `goods_1` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
+-- 转存表中的数据 `goods_1`
+--
+
+INSERT INTO `goods_1` (`Gno`, `Gname`, `Uname`, `Gtype`, `Gaddress`, `Gstate`) VALUES
+(2, 'test', 'daxin', 'tag_meng', 'img/item/689786.jpg', 'å¸‚åœºä¸­'),
+(1, '433', 'daxin', 'tag_shishang', 'img/item/991752.jpg', 'å¸‚åœºä¸­'),
+(3, 'sss', 'daxin', 'tag_gexing', 'img/item/646646.jpg', 'å¸‚åœºä¸­'),
+(4, 'ttt', 'daxin', 'tag_shishang', 'img/item/444472.jpg', 'å¸‚åœºä¸­');
+
+--
 -- 触发器 `goods_1`
 --
 DELIMITER $$
@@ -237,6 +247,16 @@ CREATE TABLE `goods_2` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
+-- 转存表中的数据 `goods_2`
+--
+
+INSERT INTO `goods_2` (`Gno`, `Gcheck`, `Gtimestamp`) VALUES
+(2, 'å®¡æ ¸é€šè¿‡', '2016-11-27 07:11:40'),
+(1, 'å®¡æ ¸é€šè¿‡', '2016-11-26 08:02:00'),
+(3, 'å®¡æ ¸é€šè¿‡', '2016-11-27 07:11:37'),
+(4, 'å®¡æ ¸é€šè¿‡', '2016-11-27 07:11:34');
+
+--
 -- 触发器 `goods_2`
 --
 DELIMITER $$
@@ -265,6 +285,16 @@ CREATE TABLE `goods_3` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
+-- 转存表中的数据 `goods_3`
+--
+
+INSERT INTO `goods_3` (`Gno`, `Ginstruction`, `Gparameter`, `Gtime`, `Gprice`) VALUES
+(2, 'test', '', 0, 0),
+(1, '344', '', 0, 0),
+(3, 'sss', '', 0, 0),
+(4, 'ttt', '', 0, 0);
+
+--
 -- 触发器 `goods_3`
 --
 DELIMITER $$
@@ -289,6 +319,15 @@ CREATE TABLE `message` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
+-- 转存表中的数据 `message`
+--
+
+INSERT INTO `message` (`Mno`, `Mcontent`, `Mtimestamp`) VALUES
+(1, 'ä½ å¥½å•Š', '2016-11-25 14:54:22'),
+(2, '32323', '2016-11-25 15:06:59'),
+(3, '', '2016-11-25 16:26:09');
+
+--
 -- 触发器 `message`
 --
 DELIMITER $$
@@ -309,6 +348,15 @@ CREATE TABLE `notify` (
   `Unamesend` varchar(40) NOT NULL,
   `Unamereceive` varchar(40) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `notify`
+--
+
+INSERT INTO `notify` (`Mno`, `Unamesend`, `Unamereceive`) VALUES
+(1, 'admin', 'daxin'),
+(2, 'daxin', 'daxin'),
+(3, 'daxin', 'daxin');
 
 --
 -- 触发器 `notify`
@@ -449,7 +497,9 @@ CREATE TABLE `user_1` (
 --
 
 INSERT INTO `user_1` (`Uname`, `Sno`, `Uroot`) VALUES
-('äºšå½“.è‚–åŽ', '00000000', 'ç®¡ç†å‘˜');
+('äºšå½“.è‚–åŽ', '00000000', 'ç®¡ç†å‘˜'),
+('daxin', '1', 'æ™®é€šç”¨æˆ·'),
+('admin', '000', 'ç®¡ç†å‘˜');
 
 -- --------------------------------------------------------
 
@@ -469,7 +519,9 @@ CREATE TABLE `user_2` (
 --
 
 INSERT INTO `user_2` (`Uname`, `Usexy`, `Ucredit`, `Uaddress`) VALUES
-('äºšå½“.è‚–åŽ', 'ç”·', 1000, '');
+('äºšå½“.è‚–åŽ', 'ç”·', 1000, ''),
+('daxin', 'ç”·', 60, 'img/defaultavator.jpg'),
+('admin', 'ç”·', 60, 'img/defaultavator.jpg');
 
 -- --------------------------------------------------------
 
@@ -489,7 +541,9 @@ CREATE TABLE `user_3` (
 --
 
 INSERT INTO `user_3` (`Uname`, `Upassword`, `Uphone`, `Uemail`) VALUES
-('äºšå½“.è‚–åŽ', '00000000', '00000000000', '00000000000@nba.com');
+('äºšå½“.è‚–åŽ', '00000000', '00000000000', '00000000000@nba.com'),
+('daxin', 'daxin', '123', '123@123.com'),
+('admin', 'admin', '000', '000@000.0');
 
 -- --------------------------------------------------------
 
