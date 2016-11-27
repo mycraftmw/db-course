@@ -59,6 +59,17 @@ function fillinfo() {
         return;
     }
     var udata = eval('(' + document.cookie + ')');
+    $.ajax({
+        url: 'controllor/show_u_inf',
+        type: 'POST',
+        data: {
+            uname: udata.uname
+        },
+        success: function (rdata) {
+            document.cookie = rdata;
+        }
+    });
+    var udata = eval('(' + document.cookie + ')');
     document.getElementById('uiname').innerText = udata.uname;
     document.getElementById('uisno').innerText = udata.sno;
     document.getElementById('uisex').innerText = udata.usexy;
@@ -134,7 +145,7 @@ function fillinfo() {
                         var p = document.createElement('p');
                         var lb = document.createElement('label');
                         var btn = document.createElement('button');
-                        var btn2 = document.createElement('button');
+                        // var btn2 = document.createElement('button');
                         img.src = element.gaddress;
                         img.width = 300;
                         lb.innerText = element.gstate;
@@ -142,16 +153,16 @@ function fillinfo() {
                         btn.setAttribute('class', 'btn btn-danger');
                         btn.setAttribute('onclick', 'udelitem(' + element.gno + ');');
                         btn.innerText = '删除';
-                        btn2.setAttribute('class', 'btn btn-success');
-                        btn2.setAttribute('onclick', 'openmd(' + element.gno + ')');
-                        btn2.innerText = '交易完成';
+                        // btn2.setAttribute('class', 'btn btn-success');
+                        // btn2.setAttribute('onclick', 'openmd(' + element.gno + ')');
+                        // btn2.innerText = '交易完成';
                         li.appendChild(img);
                         li.appendChild(p);
                         li.appendChild(lb);
                         li.appendChild(document.createElement('br'));
                         li.appendChild(btn);
-                        li.appendChild(document.createElement('br'));
-                        li.appendChild(btn2);
+                        // li.appendChild(document.createElement('br'));
+                        // li.appendChild(btn2);
                         li.appendChild(document.createElement('hr'));
                         ui.appendChild(li);
                     }
@@ -304,7 +315,10 @@ function changepw() {
 }
 
 function search() {
-    alert(document.getElementById('searchbar').value);
+    if (document.getElementById('searchbar').value == "") {
+        location.reload();
+        return false;
+    }
     $.ajax({
         type: 'POST',
         url: 'controllor/show_g_search',
@@ -314,6 +328,22 @@ function search() {
         success: function (rdata) {
             alert(rdata)
             var rval = eval('(' + rdata + ')');
+            $("#og-grid").empty();
+            if (rval.status == 'n2') {
+                alert("没有相关物品");
+                return false;
+            }
+            var k = [];
+            for (var key in rval) {
+                if (key != 'status' && rval.hasOwnProperty(key)) {
+                    var element = rval[key];
+                    k.push(buildItem(element.gname, element.ginstruction, element.gtype, element.gaddress, element.uname, element.gno));
+                }
+            }
+            try {
+                Grid.addItems(k);
+            } catch (error) {
+            }
 
         }
     });
@@ -325,16 +355,18 @@ function fillMarket() {
         type: 'POST',
         url: 'controllor/show_g_list',
         success: function (data) {
-            alert(data);
-            var res = eval('(' + data + ')');
+            var rval = eval('(' + data + ')');
             var k = [];
-            for (var key in res) {
-                if (key != 'status' && res.hasOwnProperty(key)) {
-                    var element = res[key];
+            for (var key in rval) {
+                if (key != 'status' && rval.hasOwnProperty(key)) {
+                    var element = rval[key];
                     k.push(buildItem(element.gname, element.ginstruction, element.gtype, element.gaddress, element.uname, element.gno));
                 }
             }
-            Grid.addItems(k);
+            try {
+                Grid.addItems(k);
+            } catch (error) {
+            }
         }
     });
 
@@ -358,7 +390,8 @@ function buildItem(title, description, label, imgUrl, owner, gno) {
     a.setAttribute('data-title', title);
     a.setAttribute('data-description', description);
     a.innerHTML = "<img src='" + imgUrl + "' width='100%'><div class ='hover-mask'><h3>" + title + "</h3><span><i class='fa fa-plus fa- 2x'></i></span></div>";
-    kuang.appendChild(li);
+    // kuang.appendChild(li);
+    $("#og-grid").prepend(li);
     return li;
 }
 
@@ -368,20 +401,20 @@ function sendmsg(endname, gno) {
         return false;
     }
     var udata = eval('(' + document.cookie + ')');
-    if ($('#applycha').is(':checked')) {
-        $.ajax({
-            url: 'controllor/apply_cha',
-            type: 'POST',
-            data: {
-                gnoplan: gno,
-                gnoadopt: gno,
-                chamoney: 0
-            },
-            success: function (rdata) {
-                alert(rdata);
-            }
-        });
-    }
+    // if ($('#applycha').is(':checked')) {
+    //     $.ajax({
+    //         url: 'controllor/apply_cha',
+    //         type: 'POST',
+    //         data: {
+    //             gnoplan: gno,
+    //             gnoadopt: gno,
+    //             chamoney: 0
+    //         },
+    //         success: function (rdata) {
+    //             alert(rdata);
+    //         }
+    //     });
+    // }
     if (document.getElementById('msgs').value == '')
         return false;
     $.ajax({
@@ -450,7 +483,12 @@ function uploadavator() {
         processData: false,
         contentType: false,
     }).done(function (res) {
-        var rval = eval('(' + res + ')');
+        try {
+            var rval = eval('(' + res + ')');
+        } catch (error) {
+            alert('未选择文件');
+            return false;
+        }
         udata.uaddress = rval.imgUrl;
         document.cookie = JSON.stringify(udata);
         location.reload();

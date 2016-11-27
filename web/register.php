@@ -212,7 +212,6 @@
 
   <!-- Main jQuery -->
   <script src="js/jquery-1.11.0.min.js"></script>
-  <!--<script src="js/jquery-3.1.1.min.js"></script>-->
   <!-- Bootstrap 3.1 -->
   <script src="js/bootstrap.min.js"></script>
   <!-- Slitslider -->

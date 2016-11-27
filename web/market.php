@@ -155,7 +155,7 @@
           <p>
             <label class="black">消息：</label>
             <input id="msgs" style='width:480px;' type="text" name="username" placeholder="消息" style='color:black;'/><br>
-            <input id="applycha" type="checkbox" name="app"><label for='applycha' style='color:black;'>同时发送交易请求</label> 
+            <!--<input id="applycha" type="checkbox" name="app"><label for='applycha' style='color:black;'>同时发送交易请求</label> -->
           </p>
         </div>
         <div class="modal-footer">
@@ -210,125 +210,17 @@
       <ul id="og-grid" class="og-grid">
 
         <!-- single portfolio item -->
-        <li class="mix tag_shiyong ">
-          <a href="javascript:void(0)" data-largesrc="img/item/images.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
-            <img src="img/item/images.jpg" width="100%">
-            <div class="hover-mask">
-              <h3>Azuki bean</h3>
-              <span><i class="fa fa-plus fa-2x"></i></span>
-            </div>
-          </a>
-        </li>
-        <!-- /single portfolio item -->
-
-        <!-- single portfolio item -->
-        <li class="mix tag_meng ">
-          <a href="javascript:void(0)" data-largesrc="img/item/fdj.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
-            <img src="img/item/fdj.jpg" width="100%">
-            <div class="hover-mask">
-              <h3>Veggies sunt bona vobis</h3>
-              <span><i class="fa fa-plus fa-2x"></i></span>
-            </div>
-          </a>
-        </li>
-        <!-- /single portfolio item -->
-
-        <!-- single portfolio item -->
-        <li class="mix tag_shishang ">
-          <a href="javascript:void(0)" data-largesrc="img/item/th.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
-            <img src="img/item/th.jpg" width="100%">
-            <div class="hover-mask">
-              <h3>Dandelion horseradish</h3>
-              <span><i class="fa fa-plus fa-2x"></i></span>
-            </div>
-          </a>
-        </li>
-        <!-- /single portfolio item -->
-
-        <!-- single portfolio item -->
-        <li class="mix tag_pinpai ">
-          <a href="javascript:void(0)" data-largesrc="img/item/hu.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
+        <li id="shaobing" class="mix tag_pinpai">
+          <a href="javascript:$('#msgmsg').modal();" style = "display:none;" data-largesrc="img/item/hu.jpg" data-title="闲置收音机" data-description="品牌收音机一台，功能完好，外观无明显损毁。">
             <img src="img/item/hu.jpg" width="100%">
             <div class="hover-mask">
-              <h3>Dandelion horseradish</h3>
+              <h3>闲置收音机</h3>
               <span><i class="fa fa-plus fa-2x"></i></span>
             </div>
           </a>
         </li>
-        <!-- /single portfolio item -->
 
-        <!-- single portfolio item -->
-        <li class="mix tag_pinpai ">
-          <a href="javascript:void(0)" data-largesrc="img/item/guo.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
-            <img src="img/item/guo.jpg" width="100%">
-            <div class="hover-mask">
-              <h3>Azuki bean</h3>
-              <span><i class="fa fa-plus fa-2x"></i></span>
-            </div>
-          </a>
-        </li>
-        <!-- /single portfolio item -->
-
-        <!-- single portfolio item -->
-        <li class="mix tag_shiyong ">
-          <a href="javascript:void(0)" data-largesrc="img/item/fozhu.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
-            <img src="img/item/fozhu.jpg" width="100%">
-            <div class="hover-mask">
-              <h3>Veggies sunt bona vobis</h3>
-              <span><i class="fa fa-plus fa-2x"></i></span>
-            </div>
-          </a>
-        </li>
-        <!-- /single portfolio item -->
-
-        <!-- single portfolio item -->
-        <li class="mix tag_shiyong">
-          <a href="javascript:void(0)" data-largesrc="img/item/biao.jpg" data-title="Dandelion horseradish" data-description="Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.">
-            <img src="img/item/biao.jpg" width="100%">
-            <div class="hover-mask">
-              <h3>Dandelion horseradish</h3>
-              <span><i class="fa fa-plus fa-2x"></i></span>
-            </div>
-          </a>
-        </li>
-        <!-- /single portfolio item -->
-
-        <!-- single portfolio item -->
-        <li class="mix tag_shiyong">
-          <a href="javascript:void(0)" data-largesrc="img/item/shu.jpg" data-title="Azuki bean" data-description="Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.">
-            <img src="img/item/shu.jpg" width="100%">
-            <div class="hover-mask">
-              <h3>Azuki bean</h3>
-              <span><i class="fa fa-plus fa-2x"></i></span>
-            </div>
-          </a>
-        </li>
-        <!-- /single portfolio item -->
-
-        <!-- single portfolio item -->
-        <li class="mix tag_shiyong">
-          <a href="javascript:void(0)" data-largesrc="img/item/tuolaji.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
-            <img src="img/item/tuolaji.jpg" width="100%">
-            <div class="hover-mask">
-              <h3>Veggies sunt bona vobis</h3>
-              <span><i class="fa fa-plus fa-2x"></i></span>
-            </div>
-          </a>
-        </li>
-        <!-- /single portfolio item -->
-
-        <!-- single portfolio item -->
-        <li class="mix tag_meng">
-          <a href="javascript:void(0)" data-largesrc="img/item/wang.jpg" data-title="Veggies sunt bona vobis" data-description="Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.">
-            <img src="img/item/wang.jpg" width="100%">
-            <div class="hover-mask">
-              <h3>Veggies sunt bona vobis</h3>
-              <span><i class="fa fa-plus fa-2x"></i></span>
-            </div>
-          </a>
-        </li>
-        <!-- /single portfolio item -->
-
+        
       </ul>
       <!-- end og grid -->
     </div>
@@ -393,8 +285,8 @@
 <!-- Modernizer Script for old Browsers -->
   <script src="js/modernizr-2.6.2.min.js"></script>
   <!-- Main jQuery -->
-
   <script src="js/jquery-1.11.0.min.js"></script>
+  <!--<script src="js/jquery-1.7.min.js"></script>-->
   <!-- Bootstrap 3.1 -->
   <script src="js/bootstrap.min.js"></script>
   <!-- Slitslider -->
